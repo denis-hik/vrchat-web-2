@@ -51,7 +51,27 @@ export const WingsStyled = styled.div<{selected: boolean}>`
         left: var(--space-wing);
     }
     .wing-b {
+        position: absolute;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
         bottom: var(--space-wing);
+        
+        display: flex;
+        justify-content: center;
+        
+        &.selected {
+            bottom: -999px;
+        }
+        .glass-surface {
+            width: var(--width-wing-selected) !important;
+            height: var(--width-wing) !important;
+            
+            min-height: 50px;
+        }
+        
+        & > div {
+            background: rgba(0, 0, 0, 0.3)
+        }
     }
 
     & > div {

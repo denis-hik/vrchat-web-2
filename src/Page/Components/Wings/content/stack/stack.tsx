@@ -1,26 +1,15 @@
 import {WingsContentStackStyled} from "./styled";
 import {Card} from "../../../../../Components/General/My/Card/Card";
-
-import vive from "../../../../../media/stack/He536b68c4c0d48acb0ffe73378829104A.jpg.png"
-import quest from "../../../../../media/stack/01_Meta-Quest-Pro.jpg.png"
-import base from "../../../../../media/stack/1_95_.png"
-
-const stackData = [{
-    image: quest,
-    name: "Quest Pro"
-},{
-    image: vive,
-    name: "VIVE Tracker"
-},{
-    image: base,
-    name: "VIVE Stations"
-}]
+import {useSelector} from "react-redux";
+import {stacksSelector} from "../../../../../Context/selectors";
 
 export const StackItemContent = () => {
+    const stacks = useSelector(stacksSelector)
 
     return (
         <WingsContentStackStyled>
-            {stackData.map((world) => (<Card
+            {stacks.map((world, index) => (<Card
+                key={index}
                 className={"item"}
                 image={world.image}
                 description={world.name}

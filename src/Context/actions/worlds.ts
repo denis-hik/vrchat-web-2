@@ -1,14 +1,7 @@
 import {ActionReducerMapBuilder, createAsyncThunk} from "@reduxjs/toolkit";
 import {RootState} from "../../store";
 import axios from "axios";
-import {initGlobalSliceType} from "../reducer/types";
-
-export type TWorld = {
-    name: string,
-    image: string
-    visits: number
-    likes: number
-}
+import {initGlobalSliceType, TWorld} from "../reducer/types";
 
 type TResponse = {
     result: TWorld[]

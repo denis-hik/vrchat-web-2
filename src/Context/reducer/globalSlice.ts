@@ -3,17 +3,7 @@ import {initGlobalSliceType, WingType} from "./types";
 
 import {ext as preloadImgesEXT} from "../actions/images";
 import {ext as getWorldsEXT} from "../actions/worlds";
-
-const globalSliceInitialState: initGlobalSliceType = {
-    wing: undefined,
-    images: {
-        state: "idle"
-    },
-    worlds: {
-        state: "idle",
-        result: []
-    }
-}
+import {globalSliceInitialState} from "./init";
 
 const globalSlice = createSlice({
     name: 'global',

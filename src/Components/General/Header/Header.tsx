@@ -29,7 +29,7 @@ export const Header = () => {
         dispatch(setWing(undefined))
     }, [wing])
     const onVrchat = useCallback(() => {
-        window.open("https://vrchat.com", "_blank")
+        window.open("https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9", "_blank")
     }, [])
 
     // useEffect(() => {

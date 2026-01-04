@@ -7,6 +7,7 @@ import {setWing} from "../../../Context/reducer/globalSlice";
 import BlurText from "../../../Components/public/BlurText";
 import {wingSelector} from "../../../Context/selectors";
 import {WingsContentItem} from "./content/content";
+import {BottomItemContent} from "./content/links/links";
 
 export const Wings = () => {
     const dispatch = useAppDispatch();
@@ -53,6 +54,16 @@ export const Wings = () => {
                 />
                 <WingsContentItem type={"world"} />
             </GlassSurface>
+            <div className={`wing-b ${wing !== undefined ? "selected" : ""}`}>
+                <GlassSurface
+                    mixBlendMode={"difference"}
+                    borderRadius={24}
+                    id={"wing-b"}
+                    fallbackOnly
+                >
+                    <BottomItemContent />
+                </GlassSurface>
+            </div>
         </WingsStyled>
     )
 }
