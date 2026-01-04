@@ -32,30 +32,6 @@ export const Header = () => {
         window.open("https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9", "_blank")
     }, [])
 
-    // useEffect(() => {
-    //     // const threshold = 0.9;
-    //     const threshold = 1.2;
-    //
-    //     const onScroll = () => {
-    //         const doc = document.documentElement;
-    //
-    //         const scrollTop = doc.scrollTop;
-    //         const viewportH = window.innerHeight;
-    //         const fullH = doc.scrollHeight;
-    //
-    //         const maxScroll = fullH - viewportH;
-    //         if (maxScroll <= 0) return;
-    //
-    //         const progress = scrollTop / maxScroll;
-    //
-    //         setShow(progress >= threshold)
-    //     };
-    //
-    //     onScroll();
-    //     window.addEventListener("scroll", onScroll, { passive: true });
-    //     return () => window.removeEventListener("scroll", onScroll);
-    // }, []);
-
     return (
         <HeaderStyled className={(active ? 'active' : '') + (show ? " hide" :'')}>
             <GlassSurface
@@ -66,6 +42,9 @@ export const Header = () => {
             >
                 <div className={"logo"}>
                     <img src={logo} onClick={onStart} />
+                </div>
+                <div className={"back"} onClick={onStart}>
+                    Back
                 </div>
                 <div className={"text"}>
                     <DecryptedText

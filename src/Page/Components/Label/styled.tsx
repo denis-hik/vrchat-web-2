@@ -6,6 +6,8 @@ export const LabelStartPageLabel = styled.div<{active?: boolean}>`
     left: 0;
     right: 0;
     bottom: 0;
+    
+    cursor: default;
 
     opacity: ${({ active }) => (active ? 1 : 0)};
     transition: opacity 0.3s ease-in-out;

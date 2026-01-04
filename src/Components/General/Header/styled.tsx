@@ -17,6 +17,17 @@ export const HeaderStyled = styled.div`
         height: 45px !important;
     }
     
+    .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        transition: all 0.3s ease-in-out;
+        width: 0;
+        color: white;
+        opacity: 0;
+    }
+    
     & > div {
         background: rgba(0, 0, 0, 0.3)
     }
@@ -66,6 +77,20 @@ export const HeaderStyled = styled.div`
         .logo1 {
             width: 0;
             opacity: 0;
+        }
+    }
+    
+    &.active:hover {
+        cursor: pointer;
+        
+        .logo {
+            opacity: 0;
+            width: 0;
+        }
+        
+        .back {
+            width: 100%;
+            opacity: 1;
         }
     }
     

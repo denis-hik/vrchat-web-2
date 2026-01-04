@@ -6,8 +6,7 @@ export const BottomItemContentStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5rem;
-    
+    gap: 2rem;
     
     .item-link {
         display: flex;
@@ -17,9 +16,11 @@ export const BottomItemContentStyled = styled.div`
         max-width: 200px;
         
         img {
+            width: 6rem;
             transition: all 0.3s ease-in-out;
             filter: invert(1);
             object-fit: contain;
+            height: 20px;
             
             &:hover {
                 filter: invert(0.7);

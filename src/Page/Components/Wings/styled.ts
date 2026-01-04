@@ -10,9 +10,11 @@ export const WingsStyled = styled.div<{selected: boolean}>`
     display: flex;
     
     .wings {
+        max-width: 500px;
         cursor: pointer;
         position: absolute;
         top: calc((100vh - var(--height-wing)) / 2);
+        background: rgba(0, 0, 0, 0.3);
         
         .glass-surface__content {
             pointer-events: none;
@@ -39,7 +41,6 @@ export const WingsStyled = styled.div<{selected: boolean}>`
 
             writing-mode: vertical-rl; /* или vertical-lr */
             text-orientation: upright;
-            
         }
     }
     
@@ -73,10 +74,7 @@ export const WingsStyled = styled.div<{selected: boolean}>`
             background: rgba(0, 0, 0, 0.3)
         }
     }
-
-    & > div {
-        background: rgba(0, 0, 0, 0.3)
-    }
+    
     .glass-surface {
         width: var(--width-wing) !important;
         transition: all 0.3s ease-in-out;
