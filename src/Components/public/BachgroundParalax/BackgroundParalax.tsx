@@ -185,7 +185,7 @@ export function LayeredParallaxBackground({
             height: baseHeight ? baseHeight : undefined,
             zIndex: invertOverlay ? 1 : undefined
         }
-        : { backgroundColor: "#fff" };
+        : { backgroundColor: "#000" };
 
     const overlayStyle: React.CSSProperties | undefined = overlayImageSrc
         ? {

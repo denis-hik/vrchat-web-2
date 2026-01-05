@@ -82,11 +82,17 @@ const dataImages: Record<WingKeysType | "unset", TImageData> = {
     }
 }
 
+const initImage:TImageData = {
+    id: "",
+    base: "",
+    overlay: ""
+}
+
 const StartPage = () => {
     const timer = useRef<NodeJS.Timeout | null>(null);
     const wing = useSelector(wingSelector)
 
-    const [image, setImage] = useState<TImageData>(dataImages.unset);
+    const [image, setImage] = useState<TImageData>(initImage);
 
     const [requestMotion, setRequestMotion] = useState<null | (() => Promise<boolean>)>(null);
 
@@ -171,6 +177,15 @@ const StartPage = () => {
                 clearTimeout(timer.current)
         }
     }, [wing])
+
+    useEffect(() => {
+        const startRun = async () => {
+            await preloadPair(dataImages.unset)
+            setImage(dataImages.unset)
+        }
+
+        startRun()
+    }, []);
 
     return (
         <PageContextProvider>
