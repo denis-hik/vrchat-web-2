@@ -2,6 +2,7 @@ import React from 'react';
 import {Header} from "./Components/General/Header/Header";
 import {Wings} from "./Page/Components/Wings/Wings";
 import StartPage from "./Page/StartPage";
+import {PhoneSupport} from "./Page/Components/PhoneSupport/PhoneSupport";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
             <StartPage />
             <Header/>
             <Wings />
+            <PhoneSupport />
         </>
     );
 }

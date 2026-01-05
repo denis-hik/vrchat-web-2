@@ -52,7 +52,7 @@ export const WingsStyled = styled.div<{selected: boolean}>`
         left: var(--space-wing);
     }
     .wing-b {
-        position: absolute;
+        position: fixed;
         width: 100%;
         transition: all 0.3s ease-in-out;
         bottom: var(--space-wing);

@@ -18,6 +18,7 @@ import worldA from "../media/worlds/alpha_world.png";
 import worldR from "../media/worlds/worlds-reverse.gif";
 
 import w1 from "../media/worlds/worlds/World-Home-Image-2022322f1_4_sta.file_1be8f78e-4b61-49d4-b26e-bd9903e992e3.1.png";
+import {PhoneSupport} from "./Components/PhoneSupport/PhoneSupport";
 
 type TWorldItem = {
     image: string,
