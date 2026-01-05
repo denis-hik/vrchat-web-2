@@ -14,10 +14,10 @@ export const BaseLayer = styled.div`
   inset: 0;
 `;
 
-export const OverlayWrap = styled.div<{backgroundColor: React.CSSProperties["backgroundColor"]}>`
+export const OverlayWrap = styled.div<{backgroundcolor: React.CSSProperties["backgroundColor"]}>`
   position: absolute;
   inset: 0;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundcolor};
   display: grid;
   place-items: center;
 `;

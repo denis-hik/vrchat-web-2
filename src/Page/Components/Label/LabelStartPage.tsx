@@ -9,7 +9,7 @@ export const Label: React.FC<{}> = () => {
     const wing = useSelector(wingSelector)
 
     return (
-        <LabelStartPageLabel active={wing === undefined}>
+        <LabelStartPageLabel active={wing === undefined ? "t" : "f"}>
             <BlurText
                 text={"Where Digital Reality Becomes Real"}
                 delay={150}

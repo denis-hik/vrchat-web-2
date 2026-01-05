@@ -203,7 +203,7 @@ export function LayeredParallaxBackground({
         <Root className={"back-parallax"} aria-hidden="true">
             <BaseLayer style={baseStyle} />
             {overlayImageSrc ? (
-                <OverlayWrap backgroundColor={backgroundColor}>
+                <OverlayWrap backgroundcolor={backgroundColor}>
                     <OverlayLayer className={"overlay"} ref={layerRef} style={overlayStyle} />
                 </OverlayWrap>
             ) : null}

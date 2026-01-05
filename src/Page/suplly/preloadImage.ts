@@ -12,3 +12,11 @@ export const preloadOne = (src?: string): Promise<void> => {
 export const preloadPair = (data: { base: string; overlay: string }): Promise<void> => {
     return Promise.all([preloadOne(data.base), preloadOne(data.overlay)]).then(() => void 0)
 }
+
+export const preloadAll = (data: { base: string; overlay: string }[]): Promise<void> => {
+    const list = data.flatMap((item) => [
+        ...(!!item?.base?.length ? [preloadOne(item.base)] : []),
+        ...(!!item?.overlay?.length ? [preloadOne(item.overlay)] : [])
+    ])
+    return Promise.all(list).then(() => void 0)
+}

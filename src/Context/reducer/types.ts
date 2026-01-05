@@ -1,5 +1,3 @@
-import {TResponsePreloadImages} from "../actions/images";
-
 export type WingKeysType = "world" | "stack"
 export type WingType = undefined | WingKeysType
 export type TState = 'idle' | 'pending' | 'succeeded' | 'failed'
@@ -21,12 +19,25 @@ export type TStack = {
     name: string,
 }
 
+export type TImageData= {
+    id: string,
+    base: string,
+    overlay: string,
+    opacity?: {
+        base: string,
+        overlay: string,
+        delay: number
+    },
+    revert?: {
+        base: string,
+        overlay: string,
+        delay: number
+    }
+}
+
 export type initGlobalSliceType = {
     wing:WingType
-    images: {
-        state: TState
-        result?: TResponsePreloadImages
-    },
+    image:TImageData
     worlds: {
         state: TState
         result: TWorld[]

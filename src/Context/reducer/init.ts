@@ -1,4 +1,4 @@
-import {initGlobalSliceType} from "./types";
+import {initGlobalSliceType, TImageData, WingKeysType} from "./types";
 
 import quest from "../../media/stack/01_Meta-Quest-Pro.jpg.png";
 import vive from "../../media/stack/He536b68c4c0d48acb0ffe73378829104A.jpg.png";
@@ -7,8 +7,10 @@ import gumroad from "../../media/links/gumroad.svg";
 
 export const globalSliceInitialState: initGlobalSliceType = {
     wing: undefined,
-    images: {
-        state: "idle"
+    image: {
+        id: "",
+        base: "",
+        overlay: ""
     },
     worlds: {
         state: "idle",

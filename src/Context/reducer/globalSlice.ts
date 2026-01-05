@@ -1,9 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {initGlobalSliceType, WingType} from "./types";
-
-import {ext as preloadImgesEXT} from "../actions/images";
-import {ext as getWorldsEXT} from "../actions/worlds";
+import {TImageData, WingType} from "./types";
 import {globalSliceInitialState} from "./init";
+
+import {ext as getWorldsEXT} from "../actions/worlds";
 
 const globalSlice = createSlice({
     name: 'global',
@@ -12,13 +11,15 @@ const globalSlice = createSlice({
         clear: (state) => ({...globalSliceInitialState}),
         setWing(state,action: PayloadAction<WingType>){
             state.wing = state.wing === action.payload ? undefined : action.payload;
+        },
+        setCurrentImage(state,action: PayloadAction<TImageData>){
+            state.image = action.payload;
         }
     },
     extraReducers: (builder) => {
-        preloadImgesEXT(builder)
         getWorldsEXT(builder)
     },
 })
 
-export const {clear,setWing} = globalSlice.actions
+export const {clear,setWing,setCurrentImage} = globalSlice.actions
 export default globalSlice.reducer

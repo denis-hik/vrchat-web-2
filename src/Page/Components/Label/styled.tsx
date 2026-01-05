@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LabelStartPageLabel = styled.div<{active?: boolean}>`
+export const LabelStartPageLabel = styled.div<{active?: string}>`
     position: absolute;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@ export const LabelStartPageLabel = styled.div<{active?: boolean}>`
     
     cursor: default;
 
-    opacity: ${({ active }) => (active ? 1 : 0)};
+    opacity: ${({ active }) => (active === "t" ? 1 : 0)};
     transition: opacity 0.3s ease-in-out;
     
     display: flex;
