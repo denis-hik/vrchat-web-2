@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useRef} from 'react';
-import {useAppDispatch} from "../hooks/store/store";
+import {useAppDispatch} from "../store/hooks";
 
 import staff from "../media/staff/staff.gif";
 import staffReverse from "../media/staff/staff-reverse.gif";

@@ -13,6 +13,8 @@ export const WorldsItemContent = () => {
                 className={"item"}
                 image={world.image}
                 description={world.name}
+                borderColor={"rgba(255,255,255,0.07)"}
+                backgroundColor={"rgba(255,255,255,0.07)"}
             />))}
         </WingsContentWorldsStyled>
     )

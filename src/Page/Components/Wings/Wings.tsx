@@ -2,7 +2,7 @@ import {WingsStyled} from "./styled";
 import GlassSurface from "../../../Components/public/GlassSurface/GlassSurface";
 import React, {useCallback} from "react";
 import {useSelector} from "react-redux";
-import {useAppDispatch} from "../../../hooks/store/store";
+import {useAppDispatch} from "../../../store/hooks";
 import {setWing} from "../../../Context/reducer/globalSlice";
 import BlurText from "../../../Components/public/BlurText";
 import {wingSelector} from "../../../Context/selectors";

@@ -1,5 +1,5 @@
 import {ActionReducerMapBuilder, createAsyncThunk} from "@reduxjs/toolkit";
-import {RootState} from "../../store";
+import {RootState} from "../../store/store";
 import axios from "axios";
 import {initGlobalSliceType, TWorld} from "../reducer/types";
 

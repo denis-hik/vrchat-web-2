@@ -7,7 +7,7 @@ import logo from "../../../media/logo.png";
 import logoV from "../../../media/VRChat_logo.png";
 import {useSelector} from "react-redux";
 import {wingSelector} from "../../../Context/selectors";
-import {useAppDispatch} from "../../../hooks/store/store";
+import {useAppDispatch} from "../../../store/hooks";
 import {setWing} from "../../../Context/reducer/globalSlice";
 
 

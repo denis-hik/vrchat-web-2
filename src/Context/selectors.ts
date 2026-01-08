@@ -1,5 +1,5 @@
 import {TImageData, TLink, TStack, TWorld, WingType} from "./reducer/types";
-import {RootState} from "../store";
+import {RootState} from "../store/store";
 
 export const wingSelector = (root: RootState): WingType => root.global.wing
 
