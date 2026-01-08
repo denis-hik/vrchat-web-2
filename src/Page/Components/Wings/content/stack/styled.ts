@@ -18,10 +18,8 @@ export const WingsContentStackStyled = styled.div`
         min-height: 15vh;
         
         & > div {
+            cursor: default;
             width: 100%;
         }
     }
-}
-    
-
 `
