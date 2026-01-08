@@ -14,6 +14,7 @@ export const BottomItemContentStyled = styled.div`
         justify-content: center;
 
         max-width: 200px;
+        text-decoration: none;
         
         img {
             width: 6rem;

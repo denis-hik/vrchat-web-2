@@ -42,6 +42,9 @@ export const HeaderStyled = styled.div`
             object-fit: contain;
         }
     }
+    .logo1 {
+        padding-right: 5px;
+    }
 
     .text {
         opacity: 1;
