@@ -34,7 +34,7 @@ export const Wings = () => {
             >
                 <BlurText
                    className={"label"}
-                   text={"Staff"}
+                   text={"VR accessories"}
                    animateBy={"words"}
                 />
                 <WingsContentItem type={"stack"} />
