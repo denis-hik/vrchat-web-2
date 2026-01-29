@@ -6,9 +6,8 @@ import staffReverse from "../media/staff/staff-reverse.gif";
 import {getWorlds} from "./actions/worlds";
 import {preloadAll, preloadPair} from "../Page/suplly/preloadImage";
 import {TImageData, WingKeysType} from "./reducer/types";
-import world from "../media/worlds/worlds.gif";
-import worldR from "../media/worlds/worlds-reverse.gif";
-import worldA from "../media/worlds/alpha_world.png";
+import world from "../media/worlds/new/Worlds.gif";
+import worldR from "../media/worlds/new/World-revert.gif";
 import sky from "../media/start/MountainsSky.png";
 import base from "../media/start/MountainsBase.png";
 import {useSelector} from "react-redux";
@@ -23,12 +22,7 @@ const dataImages: Record<WingKeysType | "unset", TImageData> = {
         revert: {
             base: "",
             overlay: worldR,
-            delay: 3700
-        },
-        opacity: {
-            base: "",
-            overlay: worldA,
-            delay: 3700
+            delay: 2500
         }
     },
     stack: {
