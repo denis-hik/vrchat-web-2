@@ -8,6 +8,8 @@ export const WingsContentStyled = styled.div`
     align-items: center;
     justify-content: center;
     
+    overflow: auto;
+    
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 
