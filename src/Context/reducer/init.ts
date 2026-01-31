@@ -7,6 +7,7 @@ import gumroad from "../../media/links/gumroad.svg";
 
 export const globalSliceInitialState: initGlobalSliceType = {
     wing: undefined,
+    loading: false,
     image: {
         id: "",
         base: "",

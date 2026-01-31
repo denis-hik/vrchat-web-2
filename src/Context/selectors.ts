@@ -9,4 +9,6 @@ export const stacksSelector = (root: RootState): TStack[] => root.global.stack
 
 export const linksSelector = (root: RootState): TLink[] => root.global.links
 
+export const loadingSelector = (root: RootState): boolean => root.global.loading
+
 export const imageCurrentSelector = (root: RootState):TImageData => root.global.image

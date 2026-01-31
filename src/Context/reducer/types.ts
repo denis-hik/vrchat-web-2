@@ -37,6 +37,7 @@ export type TImageData= {
 
 export type initGlobalSliceType = {
     wing:WingType
+    loading: boolean
     image:TImageData
     worlds: {
         state: TState

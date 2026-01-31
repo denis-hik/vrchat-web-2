@@ -14,12 +14,16 @@ const globalSlice = createSlice({
         },
         setCurrentImage(state,action: PayloadAction<TImageData>){
             state.image = action.payload;
+        },
+        setLoading(state,action: PayloadAction<boolean>){
+            state.loading = action.payload;
         }
+
     },
     extraReducers: (builder) => {
         getWorldsEXT(builder)
     },
 })
 
-export const {clear,setWing,setCurrentImage} = globalSlice.actions
+export const {clear,setWing,setCurrentImage,setLoading} = globalSlice.actions
 export default globalSlice.reducer

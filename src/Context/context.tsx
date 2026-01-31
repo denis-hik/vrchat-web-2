@@ -12,7 +12,7 @@ import sky from "../media/start/MountainsSky.png";
 import base from "../media/start/MountainsBase.png";
 import {useSelector} from "react-redux";
 import {imageCurrentSelector, wingSelector} from "./selectors";
-import {setCurrentImage} from "./reducer/globalSlice";
+import {setCurrentImage, setLoading} from "./reducer/globalSlice";
 
 const dataImages: Record<WingKeysType | "unset", TImageData> = {
     world: {
@@ -62,6 +62,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                 if (timer.current)
                     clearTimeout(timer.current)
 
+                dispatch(setLoading(true))
                 await preloadPair({
                     base: image.revert.base,
                     overlay: image.revert.overlay
@@ -71,6 +72,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                     base: image.revert.base,
                     overlay: image.revert.overlay
                 }))
+                dispatch(setLoading(false))
 
                 timer.current = timer.current = setTimeout(async () => {
                     await preloadPair(next)
@@ -80,8 +82,10 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                 return
             }
 
+            dispatch(setLoading(true))
             await preloadPair(next)
             dispatch(setCurrentImage(next))
+            dispatch(setLoading(false))
 
             if (next?.opacity !== undefined) {
                 if (timer.current)
@@ -89,6 +93,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
 
                 timer.current = setTimeout(async () => {
                     if (next?.opacity !== undefined) {
+                        dispatch(setLoading(true))
                         await preloadPair({
                             base: next.opacity.base,
                             overlay: next.opacity.overlay,
@@ -99,6 +104,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                             overlay: next.opacity.overlay,
                             revert: next?.revert,
                         }))
+                        dispatch(setLoading(false))
                     }
                 }, next.opacity.delay)
             }
