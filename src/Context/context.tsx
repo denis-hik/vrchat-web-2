@@ -63,6 +63,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                     clearTimeout(timer.current)
 
                 dispatch(setLoading(true))
+                await new Promise((r) => setTimeout(r, 3000))
                 await preloadPair({
                     base: image.revert.base,
                     overlay: image.revert.overlay

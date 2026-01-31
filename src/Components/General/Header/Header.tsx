@@ -1,21 +1,22 @@
 import GlassSurface from "../../public/GlassSurface/GlassSurface";
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useMemo, useRef, useState} from "react";
 import DecryptedText from "../../public/DecryptedText/DecryptedText";
 import {HeaderStyled} from "./styled";
 import logo from "../../../media/logo.png";
 import logoLoading from "../../../media/logo-loading.gif";
 import logoV from "../../../media/VRChat_logo.png";
 import {useSelector} from "react-redux";
-import {loadingSelector, wingSelector} from "../../../Context/selectors";
+import {wingSelector} from "../../../Context/selectors";
 import {useAppDispatch} from "../../../store/hooks";
 import {setWing} from "../../../Context/reducer/globalSlice";
-
+import useLoading from "./hooks/useLoading";
 
 export const Header = () => {
     const dispatch = useAppDispatch();
 
     const wing = useSelector(wingSelector);
-    const loading = useSelector(loadingSelector);
+
+    const loading = useLoading()
 
     const active = useMemo(() => {
         return wing !== undefined
@@ -29,6 +30,7 @@ export const Header = () => {
 
         dispatch(setWing(undefined))
     }, [wing])
+
     const onVrchat = useCallback(() => {
         window.open("https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9", "_blank")
     }, [])
