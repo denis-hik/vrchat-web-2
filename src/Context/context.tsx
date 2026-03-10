@@ -44,10 +44,110 @@ const dataImages: Record<WingKeysType | "unset", TImageData> = {
 
 export const pageContext = createContext<{}>({});
 
+type TImageCacheRef = React.MutableRefObject<Map<string, string>>
+type TObjectUrlsRef = React.MutableRefObject<string[]>
+
+const isWindowsChromeBrowser = () => {
+    if (typeof window === "undefined" || typeof navigator === "undefined")
+        return false
+
+    const userAgentData = (navigator as Navigator & {
+        userAgentData?: {
+            platform?: string
+        }
+    }).userAgentData
+    const platform = userAgentData?.platform || navigator.platform || ""
+    const userAgent = navigator.userAgent || ""
+    const isWindows = /Win/i.test(platform) || /Windows/i.test(userAgent)
+    const isChrome = /Chrome/i.test(userAgent) && !/Edg|OPR|YaBrowser/i.test(userAgent)
+
+    return isWindows && isChrome
+}
+
+const loadImageSource = async (
+    src: string | undefined,
+    shouldCacheImages: boolean,
+    imageCache: TImageCacheRef,
+    objectUrls: TObjectUrlsRef
+) => {
+    if (!src)
+        return ""
+
+    if (!shouldCacheImages)
+        return src
+
+    const cached = imageCache.current.get(src)
+    if (cached)
+        return cached
+
+    try {
+        const response = await fetch(src)
+        if (!response.ok)
+            return src
+        const blob = await response.blob()
+        const objectUrl = URL.createObjectURL(blob)
+
+        imageCache.current.set(src, objectUrl)
+        objectUrls.current.push(objectUrl)
+
+        return objectUrl
+    } catch {
+        return src
+    }
+}
+
+const resolvePair = async (
+    data: { base: string; overlay: string },
+    shouldCacheImages: boolean,
+    imageCache: TImageCacheRef,
+    objectUrls: TObjectUrlsRef
+) => {
+    const [base, overlay] = await Promise.all([
+        loadImageSource(data.base, shouldCacheImages, imageCache, objectUrls),
+        loadImageSource(data.overlay, shouldCacheImages, imageCache, objectUrls)
+    ])
+
+    return {
+        base,
+        overlay
+    }
+}
+
+const resolveImageData = async (
+    data: TImageData,
+    shouldCacheImages: boolean,
+    imageCache: TImageCacheRef,
+    objectUrls: TObjectUrlsRef
+): Promise<TImageData> => {
+    const resolved = await resolvePair(data, shouldCacheImages, imageCache, objectUrls)
+
+    const [revert, opacity] = await Promise.all([
+        data.revert ? resolvePair(data.revert, shouldCacheImages, imageCache, objectUrls).then((pair) => ({
+            ...pair,
+            delay: data.revert!.delay
+        })) : Promise.resolve(undefined),
+        data.opacity ? resolvePair(data.opacity, shouldCacheImages, imageCache, objectUrls).then((pair) => ({
+            ...pair,
+            delay: data.opacity!.delay
+        })) : Promise.resolve(undefined)
+    ])
+
+    return {
+        id: data.id,
+        base: resolved.base,
+        overlay: resolved.overlay,
+        ...(revert ? {revert} : {}),
+        ...(opacity ? {opacity} : {})
+    }
+}
+
 const PageContextProvider:React.FC<{children:any}> = ({children}) => {
     const dispatch = useAppDispatch()
 
     const timer = useRef<NodeJS.Timeout | null>(null);
+    const imageCache = useRef<Map<string, string>>(new Map())
+    const objectUrls = useRef<string[]>([])
+    const shouldCacheImages = useRef(isWindowsChromeBrowser())
 
     const wing = useSelector(wingSelector)
     const image = useSelector(imageCurrentSelector)
@@ -57,7 +157,12 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
             if (String(wing) === image.id)
                 return
 
-            const next = wing ? dataImages[wing] : dataImages.unset
+            const next = await resolveImageData(
+                wing ? dataImages[wing] : dataImages.unset,
+                shouldCacheImages.current,
+                imageCache,
+                objectUrls
+            )
             if (!!image?.revert) {
                 if (timer.current)
                     clearTimeout(timer.current)
@@ -116,15 +221,23 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
             if (timer.current)
                 clearTimeout(timer.current)
         }
-    }, [wing])
+    }, [dispatch, image.id, image.revert, wing])
 
     useEffect(() => {
+        const objectUrlsRef = objectUrls
+        const imageCacheRef = imageCache
+
         const startRun = async () => {
             let list = []
-            const keys = Object.keys(dataImages)
+            const keys = Object.keys(dataImages) as Array<WingKeysType | "unset">
 
-            for (const key in keys) {
-                const item:  TImageData = dataImages[key as keyof Record<WingKeysType | "unset", TImageData>]
+            for (const key of keys) {
+                const item = await resolveImageData(
+                    dataImages[key],
+                    shouldCacheImages.current,
+                    imageCache,
+                    objectUrls
+                )
                 list.push(item)
                 if (!!item?.revert)
                     list.push(item.revert)
@@ -136,11 +249,17 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
         }
 
         startRun()
+
+        return () => {
+            objectUrlsRef.current.forEach((item) => URL.revokeObjectURL(item))
+            objectUrlsRef.current = []
+            imageCacheRef.current.clear()
+        }
     }, []);
 
     useEffect(() => {
         dispatch(getWorlds())
-    },[])
+    },[dispatch])
 
     return (
         <pageContext.Provider value={{}}>
