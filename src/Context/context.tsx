@@ -221,7 +221,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
             if (timer.current)
                 clearTimeout(timer.current)
         }
-    }, [dispatch, image.id, image.revert, wing])
+    }, [wing])
 
     useEffect(() => {
         const objectUrlsRef = objectUrls

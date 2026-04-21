@@ -35,6 +35,21 @@ export type TImageData= {
     }
 }
 
+export type TSupportProduct = {
+    id: string,
+    name: string,
+    image: string,
+    key: string
+}
+
+export type TSupportState = {
+    checkState: TState,
+    sendState: TState,
+    product?: TSupportProduct,
+    sent: boolean,
+    error?: string
+}
+
 export type initGlobalSliceType = {
     wing:WingType
     loading: boolean
@@ -45,4 +60,5 @@ export type initGlobalSliceType = {
     }
     links: TLink[],
     stack: TStack[]
+    support: TSupportState
 }

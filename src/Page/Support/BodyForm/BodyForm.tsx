@@ -1,0 +1,163 @@
+import {useEffect, useMemo, useState} from "react";
+import {useSelector} from "react-redux";
+import {checkSupportKey, sendSupportRequest} from "../../../Context/actions/support";
+import {
+    supportCheckStateSelector,
+    supportErrorSelector,
+    supportProductSelector,
+    supportSendStateSelector,
+    supportSentSelector
+} from "../../../Context/selectors";
+import {resetSupport} from "../../../Context/reducer/globalSlice";
+import {useAppDispatch} from "../../../store/hooks";
+import {SupportField} from "./SupportField";
+import {BodyFormStyled} from "./styled";
+
+export const BodyForm = () => {
+    const dispatch = useAppDispatch();
+    const product = useSelector(supportProductSelector);
+    const checkState = useSelector(supportCheckStateSelector);
+    const sendState = useSelector(supportSendStateSelector);
+    const supportError = useSelector(supportErrorSelector);
+    const supportSent = useSelector(supportSentSelector);
+
+    const [dataState, setDataState] = useState({
+        key: "",
+        title: "",
+        des: "",
+        productId: 0
+    });
+
+    const [localError, setLocalError] = useState("");
+
+    const hasProduct = useMemo(() => product !== undefined, [product]);
+    const checking = checkState === "pending";
+    const sending = sendState === "pending";
+
+    useEffect(() => {
+        return () => {
+            dispatch(resetSupport());
+        };
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!product)
+            return;
+
+        setDataState((prev) => ({
+            ...prev,
+            key: product.key,
+            productId: Number(product.id) || 0
+        }));
+    }, [product]);
+
+    const setValue = (name: "key" | "title" | "des", value: string) => {
+        setDataState((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const onCheck = async () => {
+        if (!dataState.key.trim()) {
+            setLocalError("License key is required");
+            return;
+        }
+
+        setLocalError("");
+        await dispatch(checkSupportKey({
+            license_key: dataState.key.trim()
+        }));
+    };
+
+    const onSend = async () => {
+        if (!dataState.title.trim()) {
+            setLocalError("Problem title is required");
+            return;
+        }
+
+        if (!dataState.des.trim()) {
+            setLocalError("Description is required");
+            return;
+        }
+
+        setLocalError("");
+        await dispatch(sendSupportRequest({
+            license_key: dataState.key.trim(),
+            name: dataState.title.trim(),
+            description: dataState.des.trim()
+        }));
+    };
+
+    return (
+        <BodyFormStyled data-checked={hasProduct} data-sent={supportSent}>
+            <h1 className={"support-title"}>Support</h1>
+
+            <div className={"key-step"}>
+                <div className={"support-actions"}>
+                    <div className={"support-input-wrap"}>
+                        <input
+                            value={dataState.key}
+                            onChange={(event) => setValue("key", event.target.value)}
+                            placeholder={"Key product"}
+                            disabled={checking || hasProduct}
+                        />
+                    </div>
+
+                    <button type={"button"} onClick={onCheck} disabled={checking || hasProduct}>
+                        {checking ? "Checking..." : "Check"}
+                    </button>
+                </div>
+
+                {(localError || supportError) && (
+                    <div className={"support-message error"}>
+                        {localError || supportError}
+                    </div>
+                )}
+            </div>
+
+            <div className={"support-product"}>
+                {product?.image ? (
+                    <img src={product.image} alt={product.name} className={"product-image"} />
+                ) : (
+                    <div className={"product-image placeholder"} />
+                )}
+
+                <div className={"product-copy"}>
+                    <h2>{product?.name}</h2>
+                    <p>Product found by your license key. Describe the problem and send the request.</p>
+                    <div className={"product-key"}>{product?.key}</div>
+                </div>
+            </div>
+
+            <div className={"support-body"}>
+                <SupportField
+                    label={"Problem title"}
+                    value={dataState.title}
+                    onChange={(value) => setValue("title", value)}
+                    placeholder={"Short problem title"}
+                />
+
+                <SupportField
+                    label={"Description"}
+                    value={dataState.des}
+                    onChange={(value) => setValue("des", value)}
+                    placeholder={"Describe the issue in detail"}
+                    textarea
+                />
+
+                <div className={"support-submit-row"}>
+                    <button type={"button"} onClick={onSend} disabled={!hasProduct || sending}>
+                        {sending ? "Sending..." : "Send"}
+                    </button>
+                </div>
+
+                {supportSent && (
+                    <div className={"support-message success"}>
+                        Support request sent successfully.
+                    </div>
+                )}
+            </div>
+        </BodyFormStyled>
+    );
+};

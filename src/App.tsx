@@ -1,18 +1,38 @@
 import React from 'react';
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Header} from "./Components/General/Header/Header";
 import {Wings} from "./Page/Components/Wings/Wings";
 import StartPage from "./Page/StartPage";
 import {PhoneSupport} from "./Page/Components/PhoneSupport/PhoneSupport";
+import {SupportPage} from "./Page/Support/SupportPage";
 
-function App() {
-
+const HomeRoute = () => {
     return (
         <>
             <StartPage />
-            <Header/>
+            <Header />
             <Wings />
             <PhoneSupport />
         </>
+    );
+};
+
+const SupportRoute = () => {
+    return (
+        <>
+            <SupportPage />
+            <Header />
+        </>
+    );
+};
+
+function App() {
+    return (
+        <Routes>
+            <Route path={"/"} element={<HomeRoute />} />
+            <Route path={"/support"} element={<SupportRoute />} />
+            <Route path={"*"} element={<Navigate to={"/"} replace />} />
+        </Routes>
     );
 }
 

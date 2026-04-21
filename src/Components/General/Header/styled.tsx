@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const HeaderStyled = styled.div`
     display: flex;
     position: fixed;
+    z-index: 10;
     justify-content: center;
     top: 10px;
     height: 45px;

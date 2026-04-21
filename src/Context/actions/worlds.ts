@@ -2,6 +2,7 @@ import {ActionReducerMapBuilder, createAsyncThunk} from "@reduxjs/toolkit";
 import {RootState} from "../../store/store";
 import axios from "axios";
 import {initGlobalSliceType, TWorld} from "../reducer/types";
+import env from "../../env";
 
 type TResponse = {
     result: TWorld[]
@@ -12,7 +13,7 @@ type TPayload = undefined
 export const getWorlds = createAsyncThunk<TResponse, TPayload,{state: RootState}>(
     "getWorlds",
     async (payload,{dispatch,fulfillWithValue}):Promise<TResponse> => {
-        const response = await axios.get<TResponse>(`https://request.denishik.ru/vrchat/worlds/author`)
+        const response = await axios.get<TResponse>(`${env.host}/vrchat/worlds/author`)
         return fulfillWithValue(response.data)
     }
 )

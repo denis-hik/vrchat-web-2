@@ -22,3 +22,11 @@ declare module "*.ttf" {
     const src: string;
     export default src;
 }
+
+declare module "./env" {
+    const env: {
+        host: string;
+    };
+
+    export default env;
+}

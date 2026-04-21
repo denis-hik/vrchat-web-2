@@ -1,4 +1,4 @@
-import {initGlobalSliceType, TImageData, WingKeysType} from "./types";
+import {initGlobalSliceType} from "./types";
 
 import quest from "../../media/stack/01_Meta-Quest-Pro.jpg.png";
 import vive from "../../media/stack/He536b68c4c0d48acb0ffe73378829104A.jpg.png";
@@ -33,5 +33,10 @@ export const globalSliceInitialState: initGlobalSliceType = {
     },{
         image: base,
         name: "VIVE Stations"
-    }]
+    }],
+    support: {
+        checkState: "idle",
+        sendState: "idle",
+        sent: false
+    }
 }
