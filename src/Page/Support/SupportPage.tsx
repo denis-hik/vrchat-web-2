@@ -3,10 +3,12 @@ import {LayeredParallaxBackground} from "../../Components/public/BachgroundParal
 import GlassSurface from "../../Components/public/GlassSurface/GlassSurface";
 import {SupportPageStyled} from "./styled";
 import {BodyForm} from "./BodyForm/BodyForm";
+import sky from "../../media/start/MountainsSky.png";
+import base from "../../media/start/MountainsBase.png";
 
 const image = {
-    base: "",
-    overlay: ""
+    base: sky,
+    overlay: base
 };
 
 export const SupportPage = () => {
