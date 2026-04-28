@@ -13,6 +13,36 @@ import {useAppDispatch} from "../../../store/hooks";
 import {SupportField} from "./SupportField";
 import {BodyFormStyled} from "./styled";
 
+const SENT_REQUEST_PREFIX = "sent:";
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+const getSentRequestTimestamp = (licenseKey: string) => {
+    if (typeof window === "undefined")
+        return null;
+
+    const value = window.localStorage.getItem(`${SENT_REQUEST_PREFIX}${licenseKey}`);
+    if (!value)
+        return null;
+
+    const timestamp = Number(value);
+    if (Number.isNaN(timestamp))
+        return null;
+
+    if (Date.now() - timestamp >= SEVEN_DAYS_MS) {
+        window.localStorage.removeItem(`${SENT_REQUEST_PREFIX}${licenseKey}`);
+        return null;
+    }
+
+    return timestamp;
+};
+
+const setSentRequestTimestamp = (licenseKey: string) => {
+    if (typeof window === "undefined")
+        return;
+
+    window.localStorage.setItem(`${SENT_REQUEST_PREFIX}${licenseKey}`, String(Date.now()));
+};
+
 export const BodyForm = () => {
     const dispatch = useAppDispatch();
     const product = useSelector(supportProductSelector);
@@ -71,6 +101,13 @@ export const BodyForm = () => {
     };
 
     const onSend = async () => {
+        const licenseKey = dataState.key.trim();
+
+        if (getSentRequestTimestamp(licenseKey)) {
+            setLocalError("You already sent a request. You can send a new one after 7 days.");
+            return;
+        }
+
         if (!dataState.title.trim()) {
             setLocalError("Problem title is required");
             return;
@@ -82,11 +119,15 @@ export const BodyForm = () => {
         }
 
         setLocalError("");
-        await dispatch(sendSupportRequest({
-            license_key: dataState.key.trim(),
+        const resultAction = await dispatch(sendSupportRequest({
+            license_key: licenseKey,
             name: dataState.title.trim(),
             description: dataState.des.trim()
         }));
+
+        if (sendSupportRequest.fulfilled.match(resultAction)) {
+            setSentRequestTimestamp(licenseKey);
+        }
     };
 
     return (
@@ -108,12 +149,6 @@ export const BodyForm = () => {
                         {checking ? "Checking..." : "Check"}
                     </button>
                 </div>
-
-                {(localError || supportError) && (
-                    <div className={"support-message error"}>
-                        {localError || supportError}
-                    </div>
-                )}
             </div>
 
             <div className={"support-product"}>
@@ -151,13 +186,19 @@ export const BodyForm = () => {
                         {sending ? "Sending..." : "Send"}
                     </button>
                 </div>
-
-                {supportSent && (
-                    <div className={"support-message success"}>
-                        Support request sent successfully.
-                    </div>
-                )}
             </div>
+
+            {(localError || supportError) && (
+                <div className={"support-message error"}>
+                    {localError || supportError}
+                </div>
+            )}
+
+            {supportSent && (
+                <div className={"support-message success"}>
+                    Support request sent successfully.
+                </div>
+            )}
         </BodyFormStyled>
     );
 };
