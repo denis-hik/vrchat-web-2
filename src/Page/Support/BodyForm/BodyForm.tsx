@@ -15,6 +15,7 @@ import {BodyFormStyled} from "./styled";
 
 const SENT_REQUEST_PREFIX = "sent:";
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+const LICENSE_KEY_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 const getSentRequestTimestamp = (licenseKey: string) => {
     if (typeof window === "undefined")
@@ -63,6 +64,7 @@ export const BodyForm = () => {
     const hasProduct = useMemo(() => product !== undefined, [product]);
     const checking = checkState === "pending";
     const sending = sendState === "pending";
+    const canCheck = !checking && !hasProduct;
 
     useEffect(() => {
         return () => {
@@ -89,15 +91,32 @@ export const BodyForm = () => {
     };
 
     const onCheck = async () => {
-        if (!dataState.key.trim()) {
+        const licenseKey = dataState.key.trim();
+
+        if (!licenseKey) {
             setLocalError("License key is required");
+            return;
+        }
+
+        if (!LICENSE_KEY_PATTERN.test(licenseKey)) {
+            setLocalError("License key has an invalid format");
             return;
         }
 
         setLocalError("");
         await dispatch(checkSupportKey({
-            license_key: dataState.key.trim()
+            license_key: licenseKey
         }));
+    };
+
+    const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key !== "Enter")
+            return;
+
+        event.preventDefault();
+
+        if (canCheck)
+            void onCheck();
     };
 
     const onSend = async () => {
@@ -140,12 +159,13 @@ export const BodyForm = () => {
                         <input
                             value={dataState.key}
                             onChange={(event) => setValue("key", event.target.value)}
+                            onKeyDown={onKeyDown}
                             placeholder={"Key product"}
-                            disabled={checking || hasProduct}
+                            disabled={!canCheck}
                         />
                     </div>
 
-                    <button type={"button"} onClick={onCheck} disabled={checking || hasProduct}>
+                    <button type={"button"} onClick={onCheck} disabled={!canCheck}>
                         {checking ? "Checking..." : "Check"}
                     </button>
                 </div>
