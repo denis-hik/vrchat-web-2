@@ -1,6 +1,7 @@
 import React from "react";
 import avatarImage from "../../../../media/quick/avatar-square.png";
 import {ProfileCardStyled} from "./styled";
+import {ActionLink} from "../ActionLink/ActionLink";
 
 type ProfileCardProps = {
     status: string;
@@ -24,23 +25,18 @@ export const ProfileCard = ({status, lead, website}: ProfileCardProps) => {
                     {lead}
                 </p>
                 <div className={"quick-actions"}>
-                    <a
-                        className={"action-link vrchat-link"}
-                        href={"https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9"}
-                        target={"_blank"}
-                        rel={"noreferrer"}
-                    >
+                    <ActionLink href={"https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9"} variant={"vrchat"}>
                         VRChat
-                    </a>
-                    <a className={"action-link secondary"} href={"https://denishik.io"} target={"_blank"} rel={"noreferrer"}>
+                    </ActionLink>
+                    <ActionLink href={"https://denishik.io"} variant={"secondary"}>
                         {website}
-                    </a>
-                    <a className={"action-link jinxxy-link"} href={"https://jinxxy.com/denis_hik"} target={"_blank"} rel={"noreferrer"}>
+                    </ActionLink>
+                    <ActionLink href={"https://jinxxy.com/denis_hik"} variant={"jinxxy"}>
                         JinxXy
-                    </a>
-                    <a className={"action-link secondary"} href={"https://denishik.gumroad.com"} target={"_blank"} rel={"noreferrer"}>
+                    </ActionLink>
+                    <ActionLink href={"https://denishik.gumroad.com"} variant={"secondary"}>
                         Gumroad
-                    </a>
+                    </ActionLink>
                 </div>
             </div>
         </ProfileCardStyled>

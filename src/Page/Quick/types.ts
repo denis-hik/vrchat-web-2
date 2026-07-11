@@ -9,6 +9,7 @@ export type QuickImageSlot = {
     title: string;
     image?: string;
     imagePosition?: string;
+    url?: string;
 };
 
 export type QuickTranslation = {

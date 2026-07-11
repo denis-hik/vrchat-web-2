@@ -1,6 +1,7 @@
 import React from "react";
 import {QuickImageSlot} from "../../types";
 import {ImageSlotsCardStyled} from "./styled";
+import {ImageSlotLink} from "./components/ImageSlotLink/ImageSlotLink";
 
 type ImageSlotsCardProps = {
     title: string;
@@ -17,10 +18,7 @@ export const ImageSlotsCard = ({title, text, slots}: ImageSlotsCardProps) => {
             </p>
             <div className={"image-grid"}>
                 {slots.map((slot) => (
-                    <div className={"image-slot"} key={slot.title}>
-                        {slot.image && <img src={slot.image} alt={slot.title} style={{objectPosition: slot.imagePosition}} />}
-                        <span>{slot.title}</span>
-                    </div>
+                    <ImageSlotLink slot={slot} key={slot.title} />
                 ))}
             </div>
         </ImageSlotsCardStyled>
