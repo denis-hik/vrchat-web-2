@@ -71,6 +71,46 @@ export const QuickPageStyled = styled.main`
         }
     }
 
+    html.quick-page-exit & {
+        background: #080a0f;
+    }
+
+    html.quick-page-exit & .quick-shell > *,
+    html.quick-page-exit & .right-column > * {
+        animation: quickBlockExit 0.42s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+        filter: blur(0);
+    }
+
+    html.quick-page-exit & .right-column > *:nth-child(4) {
+        animation-delay: 0s;
+    }
+
+    html.quick-page-exit & .right-column > *:nth-child(3) {
+        animation-delay: 0.04s;
+    }
+
+    html.quick-page-exit & .right-column > *:nth-child(2) {
+        animation-delay: 0.08s;
+    }
+
+    html.quick-page-exit & .right-column > *:nth-child(1),
+    html.quick-page-exit & .quick-shell > *:nth-child(1) {
+        animation-delay: 0.12s;
+    }
+
+    @keyframes quickBlockExit {
+        from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-18px) scale(0.975);
+            filter: blur(0);
+        }
+    }
+
     @media (max-width: 760px) {
         padding: 76px 12px 18px;
 

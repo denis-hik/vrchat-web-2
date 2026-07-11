@@ -1,5 +1,5 @@
 import GlassSurface from "../../public/GlassSurface/GlassSurface";
-import React, {useCallback, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import DecryptedText from "../../public/DecryptedText/DecryptedText";
 import {HeaderStyled} from "./styled";
 import logo from "../../../media/logo.png";
@@ -10,9 +10,16 @@ import {wingSelector} from "../../../Context/selectors";
 import {useAppDispatch} from "../../../store/hooks";
 import {setWing} from "../../../Context/reducer/globalSlice";
 import useLoading from "./hooks/useLoading";
+import {useLocation, useNavigate} from "react-router-dom";
+
+const QUICK_EXIT_CLASS = "quick-page-exit";
+const QUICK_EXIT_DELAY = 460;
 
 export const Header = () => {
     const dispatch = useAppDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const quickExitTimer = useRef<number | undefined>(undefined);
 
     const wing = useSelector(wingSelector);
 
@@ -32,8 +39,29 @@ export const Header = () => {
     }, [wing])
 
     const onVrchat = useCallback(() => {
+        if (location.pathname === "/quick") {
+            document.documentElement.classList.add(QUICK_EXIT_CLASS);
+            window.clearTimeout(quickExitTimer.current);
+
+            quickExitTimer.current = window.setTimeout(() => {
+                document.documentElement.classList.remove(QUICK_EXIT_CLASS);
+                navigate("/");
+            }, QUICK_EXIT_DELAY);
+
+            return;
+        }
+
         window.open("https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9", "_blank")
-    }, [])
+    }, [location.pathname, navigate])
+
+    useEffect(() => {
+        document.documentElement.classList.remove(QUICK_EXIT_CLASS);
+
+        return () => {
+            window.clearTimeout(quickExitTimer.current);
+            document.documentElement.classList.remove(QUICK_EXIT_CLASS);
+        };
+    }, [location.pathname])
 
     return (
         <HeaderStyled className={(active ? 'active' : '') + (show ? " hide" :'')}>
