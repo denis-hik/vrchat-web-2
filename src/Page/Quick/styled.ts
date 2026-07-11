@@ -1,0 +1,91 @@
+import styled from "styled-components";
+
+export const QuickPageStyled = styled.main`
+    min-height: 100vh;
+    padding: 88px 18px 28px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: #0f1218;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    *, :before, :after {
+        box-sizing: border-box;
+    }
+
+    .quick-shell {
+        position: relative;
+        z-index: 1;
+        width: min(980px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(260px, 0.88fr) minmax(280px, 1.12fr);
+        gap: 18px;
+    }
+
+    .right-column {
+        display: grid;
+        gap: 18px;
+    }
+
+    .quick-shell > *,
+    .right-column > * {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+        filter: blur(10px);
+        animation: quickBlockEnter 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: opacity, transform, filter;
+    }
+
+    .quick-shell > *:nth-child(1) {
+        animation-delay: 0.08s;
+    }
+
+    .right-column > *:nth-child(1) {
+        animation-delay: 0.18s;
+    }
+
+    .right-column > *:nth-child(2) {
+        animation-delay: 0.28s;
+    }
+
+    .right-column > *:nth-child(3) {
+        animation-delay: 0.38s;
+    }
+
+    .right-column > *:nth-child(4) {
+        animation-delay: 0.48s;
+    }
+
+    @keyframes quickBlockEnter {
+        from {
+            opacity: 0;
+            transform: translateY(22px) scale(0.985);
+            filter: blur(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+    }
+
+    @media (max-width: 760px) {
+        padding: 76px 12px 18px;
+
+        .quick-shell {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .quick-shell > *,
+        .right-column > * {
+            opacity: 1;
+            transform: none;
+            filter: none;
+            animation: none;
+        }
+    }
+`;

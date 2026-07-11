@@ -1,0 +1,47 @@
+import {Language, QuickTranslation} from "./types";
+import avatarAndImage from "../../media/quick/avatar-and.png";
+import mountainRoomImage from "../../media/quick/mountain-room.png";
+import reflectionDragonOutfitImage from "../../media/quick/reflection-dragon-outfit.png";
+
+export const translations: Record<Language, QuickTranslation> = {
+    ru: {
+        languageLabel: "Язык",
+        status: "13к часов онлайн",
+        lead: "VRChat-креатор с фокусом на атмосферные миры, аватары, визуальный стиль и интерактивные веб-страницы.",
+        website: "Сайт",
+        aboutTitle: "Обо мне",
+        aboutText: "Создаю визуальные проекты вокруг VRChat: миры, аватары, образы, промо-страницы и детали, которые помогают работе выглядеть цельно и запоминаться.",
+        stats: [
+            {title: "VR", text: "основная среда"},
+            {title: "3D", text: "аватары и миры"},
+            {title: "Web", text: "презентации и эффекты"},
+        ],
+        imagesTitle: "Работы",
+        imagesText: "Короткая витрина ключевых направлений: аватар, мир и товар для VRChat.",
+        imageSlots: [
+            {title: "Аватар AND", image: avatarAndImage},
+            {title: "Мир Mountain Room", image: mountainRoomImage},
+            {title: "Товар: Reflection Dragon Outfit", image: reflectionDragonOutfitImage, imagePosition: "left center"},
+        ],
+    },
+    en: {
+        languageLabel: "Language",
+        status: "13k hours online",
+        lead: "VRChat creator focused on atmospheric worlds, avatars, visual style, and interactive web pages.",
+        website: "Website",
+        aboutTitle: "About me",
+        aboutText: "I create visual projects around VRChat: worlds, avatars, outfits, promo pages, and details that make the work feel complete and memorable.",
+        stats: [
+            {title: "VR", text: "main space"},
+            {title: "3D", text: "avatars and worlds"},
+            {title: "Web", text: "presentations and effects"},
+        ],
+        imagesTitle: "Works",
+        imagesText: "A compact showcase of the main directions: avatar, world, and VRChat product.",
+        imageSlots: [
+            {title: "Avatar AND", image: avatarAndImage},
+            {title: "World Mountain Room", image: mountainRoomImage},
+            {title: "Product: Reflection Dragon Outfit", image: reflectionDragonOutfitImage, imagePosition: "left center"},
+        ],
+    },
+};
