@@ -7,9 +7,10 @@ type ImageSlotsCardProps = {
     title: string;
     text: string;
     slots: QuickImageSlot[];
+    slotTitles: Record<string, string>;
 };
 
-export const ImageSlotsCard = ({title, text, slots}: ImageSlotsCardProps) => {
+export const ImageSlotsCard = ({title, text, slots, slotTitles}: ImageSlotsCardProps) => {
     return (
         <ImageSlotsCardStyled>
             <h2>{title}</h2>
@@ -18,7 +19,7 @@ export const ImageSlotsCard = ({title, text, slots}: ImageSlotsCardProps) => {
             </p>
             <div className={"image-grid"}>
                 {slots.map((slot) => (
-                    <ImageSlotLink slot={slot} key={slot.title} />
+                    <ImageSlotLink slot={slot} title={slotTitles[slot.id]} key={slot.id} />
                 ))}
             </div>
         </ImageSlotsCardStyled>

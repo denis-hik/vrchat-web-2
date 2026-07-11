@@ -5,20 +5,27 @@ import {ActionLink} from "../ActionLink/ActionLink";
 
 type ProfileCardProps = {
     status: string;
+    trustRank: string;
     lead: string;
     website: string;
 };
 
-export const ProfileCard = ({status, lead, website}: ProfileCardProps) => {
+export const ProfileCard = ({status, trustRank, lead, website}: ProfileCardProps) => {
     return (
         <ProfileCardStyled>
             <div className={"avatar-wrap"}>
                 <img src={avatarImage} alt={"Denis Hik"} />
             </div>
             <div className={"profile-body"}>
-                <div className={"status"}>
-                    <span className={"status-dot"} />
-                    {status}
+                <div className={"status-row"}>
+                    <div className={"trust-rank"}>
+                        <span className={"trust-dot"} />
+                        {trustRank}
+                    </div>
+                    <div className={"status"}>
+                        <span className={"status-dot"} />
+                        {status}
+                    </div>
                 </div>
                 <h1>Denis Hik</h1>
                 <p className={"lead"}>

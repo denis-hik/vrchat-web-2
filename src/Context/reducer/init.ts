@@ -5,8 +5,16 @@ import vive from "../../media/stack/He536b68c4c0d48acb0ffe73378829104A.jpg.png";
 import base from "../../media/stack/1_95_.png";
 import gumroad from "../../media/links/gumroad.svg";
 
+const getInitialLanguage = () => {
+    if (typeof navigator === "undefined")
+        return "en";
+
+    return navigator.language.toLowerCase().startsWith("ru") ? "ru" : "en";
+};
+
 export const globalSliceInitialState: initGlobalSliceType = {
     wing: undefined,
+    language: getInitialLanguage(),
     loading: false,
     image: {
         id: "",

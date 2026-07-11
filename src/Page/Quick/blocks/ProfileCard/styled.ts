@@ -35,18 +35,37 @@ export const ProfileCardStyled = styled.article`
         padding: 0 22px 24px;
     }
 
-    .status {
-        display: inline-flex;
+    .status-row {
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: 8px;
+    }
+
+    .status,
+    .trust-rank {
+        display: inline-flex;
+        align-items: center;
         min-height: 28px;
         padding: 0 11px;
         border-radius: 999px;
-        color: rgba(255, 255, 255, 0.9);
-        background: rgba(255, 255, 255, 0.14);
         border: 1px solid rgba(255, 255, 255, 0.18);
         font-size: 13px;
         font-weight: 700;
+    }
+
+    .status {
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.14);
+    }
+
+    .trust-rank {
+        gap: 8px;
+        color: rgba(168, 85, 247, 0.82);
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(168, 85, 247, 0.82);
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.24);
     }
 
     .status-dot {
@@ -55,6 +74,14 @@ export const ProfileCardStyled = styled.article`
         border-radius: 50%;
         background: #38f29b;
         box-shadow: 0 0 16px rgba(56, 242, 155, 0.88);
+    }
+
+    .trust-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(168, 85, 247, 0.82);
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.82);
     }
 
     h1 {

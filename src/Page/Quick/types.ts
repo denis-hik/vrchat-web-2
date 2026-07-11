@@ -1,4 +1,4 @@
-export type Language = "ru" | "en";
+export type {Language} from "../../Context/reducer/types";
 
 export type QuickStat = {
     title: string;
@@ -6,7 +6,7 @@ export type QuickStat = {
 };
 
 export type QuickImageSlot = {
-    title: string;
+    id: string;
     image?: string;
     imagePosition?: string;
     url?: string;
@@ -15,12 +15,10 @@ export type QuickImageSlot = {
 export type QuickTranslation = {
     languageLabel: string;
     status: string;
+    trustRank: string;
     lead: string;
     website: string;
     aboutTitle: string;
     aboutText: string;
     stats: QuickStat[];
-    imagesTitle: string;
-    imagesText: string;
-    imageSlots: QuickImageSlot[];
 };

@@ -141,6 +141,12 @@ const resolveImageData = async (
     }
 }
 
+const revokeObjectUrls = (objectUrls: TObjectUrlsRef, imageCache: TImageCacheRef) => {
+    objectUrls.current.forEach((item) => URL.revokeObjectURL(item))
+    objectUrls.current = []
+    imageCache.current.clear()
+}
+
 const PageContextProvider:React.FC<{children:any}> = ({children}) => {
     const dispatch = useAppDispatch()
 
@@ -153,6 +159,8 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
     const image = useSelector(imageCurrentSelector)
 
     useEffect(() => {
+        let cancelled = false
+
         const run = async () => {
             if (String(wing) === image.id)
                 return
@@ -163,6 +171,9 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                 imageCache,
                 objectUrls
             )
+            if (cancelled)
+                return
+
             if (!!image?.revert) {
                 if (timer.current)
                     clearTimeout(timer.current)
@@ -172,6 +183,9 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                     base: image.revert.base,
                     overlay: image.revert.overlay
                 })
+                if (cancelled)
+                    return
+
                 dispatch(setCurrentImage({
                     id: next.id,
                     base: image.revert.base,
@@ -181,7 +195,8 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
 
                 timer.current = timer.current = setTimeout(async () => {
                     await preloadPair(next)
-                    dispatch(setCurrentImage(next))
+                    if (!cancelled)
+                        dispatch(setCurrentImage(next))
                 }, image.revert.delay)
 
                 return
@@ -189,6 +204,9 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
 
             dispatch(setLoading(true))
             await preloadPair(next)
+            if (cancelled)
+                return
+
             dispatch(setCurrentImage(next))
             dispatch(setLoading(false))
 
@@ -203,6 +221,9 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                             base: next.opacity.base,
                             overlay: next.opacity.overlay,
                         })
+                        if (cancelled)
+                            return
+
                         dispatch(setCurrentImage({
                             id: next.id,
                             base: next.opacity.base,
@@ -218,14 +239,14 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
         run()
 
         return () => {
+            cancelled = true
             if (timer.current)
                 clearTimeout(timer.current)
         }
     }, [wing])
 
     useEffect(() => {
-        const objectUrlsRef = objectUrls
-        const imageCacheRef = imageCache
+        let cancelled = false
 
         const startRun = async () => {
             let list = []
@@ -238,6 +259,11 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                     imageCache,
                     objectUrls
                 )
+                if (cancelled) {
+                    revokeObjectUrls(objectUrls, imageCache)
+                    return
+                }
+
                 list.push(item)
                 if (!!item?.revert)
                     list.push(item.revert)
@@ -251,9 +277,8 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
         startRun()
 
         return () => {
-            objectUrlsRef.current.forEach((item) => URL.revokeObjectURL(item))
-            objectUrlsRef.current = []
-            imageCacheRef.current.clear()
+            cancelled = true
+            revokeObjectUrls(objectUrls, imageCache)
         }
     }, []);
 
@@ -268,5 +293,4 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
     );
 };
 export default PageContextProvider
-
 

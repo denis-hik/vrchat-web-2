@@ -1,7 +1,9 @@
-import {TImageData, TLink, TStack, TSupportProduct, TWorld, WingType} from "./reducer/types";
+import {Language, TImageData, TLink, TStack, TSupportProduct, TWorld, WingType} from "./reducer/types";
 import {RootState} from "../store/store";
 
 export const wingSelector = (root: RootState): WingType => root.global.wing
+
+export const languageSelector = (root: RootState): Language => root.global.language
 
 export const worldsSelector = (root: RootState): TWorld[] => root.global.worlds.result
 

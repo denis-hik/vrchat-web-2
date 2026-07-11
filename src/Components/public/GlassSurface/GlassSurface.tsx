@@ -149,34 +149,28 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
 
     useEffect(() => {
         if (!containerRef.current) return;
+        let timeout: ReturnType<typeof setTimeout> | null = null;
 
         const resizeObserver = new ResizeObserver(() => {
-            setTimeout(updateDisplacementMap, 0);
+            if (timeout)
+                clearTimeout(timeout);
+
+            timeout = setTimeout(updateDisplacementMap, 0);
         });
 
         resizeObserver.observe(containerRef.current);
 
         return () => {
             resizeObserver.disconnect();
+            if (timeout)
+                clearTimeout(timeout);
         };
     }, []);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        const timeout = setTimeout(updateDisplacementMap, 0);
 
-        const resizeObserver = new ResizeObserver(() => {
-            setTimeout(updateDisplacementMap, 0);
-        });
-
-        resizeObserver.observe(containerRef.current);
-
-        return () => {
-            resizeObserver.disconnect();
-        };
-    }, []);
-
-    useEffect(() => {
-        setTimeout(updateDisplacementMap, 0);
+        return () => clearTimeout(timeout);
     }, [width, height]);
 
     const supportsSVGFilters = () => {

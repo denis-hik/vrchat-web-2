@@ -4,13 +4,27 @@ import {ImageSlotLinkStyled} from "./styled";
 
 type ImageSlotLinkProps = {
     slot: QuickImageSlot;
+    title: string;
 };
 
-export const ImageSlotLink = ({slot}: ImageSlotLinkProps) => {
+type ImageSlotImageProps = {
+    image?: string;
+    imagePosition?: string;
+    alt: string;
+};
+
+const ImageSlotImage = React.memo(({image, imagePosition, alt}: ImageSlotImageProps) => {
+    if (!image)
+        return null;
+
+    return <img src={image} alt={alt} style={{objectPosition: imagePosition}} />;
+});
+
+export const ImageSlotLink = ({slot, title}: ImageSlotLinkProps) => {
     const content = (
         <>
-            {slot.image && <img src={slot.image} alt={slot.title} style={{objectPosition: slot.imagePosition}} />}
-            <span>{slot.title}</span>
+            <ImageSlotImage image={slot.image} imagePosition={slot.imagePosition} alt={slot.id} />
+            <span>{title}</span>
         </>
     );
 

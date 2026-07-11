@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {TImageData, WingType} from "./types";
+import {Language, TImageData, WingType} from "./types";
 import {globalSliceInitialState} from "./init";
 
 import {ext as getWorldsEXT} from "../actions/worlds";
@@ -19,6 +19,9 @@ const globalSlice = createSlice({
         setLoading(state,action: PayloadAction<boolean>){
             state.loading = action.payload;
         },
+        setLanguage(state, action: PayloadAction<Language>) {
+            state.language = action.payload;
+        },
         resetSupport(state) {
             state.support = {
                 checkState: "idle",
@@ -34,5 +37,5 @@ const globalSlice = createSlice({
     },
 })
 
-export const {clear,setWing,setCurrentImage,setLoading,resetSupport} = globalSlice.actions
+export const {clear,setWing,setCurrentImage,setLoading,setLanguage,resetSupport} = globalSlice.actions
 export default globalSlice.reducer

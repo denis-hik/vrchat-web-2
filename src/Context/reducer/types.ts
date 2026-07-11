@@ -1,6 +1,7 @@
 export type WingKeysType = "world" | "stack"
 export type WingType = undefined | WingKeysType
 export type TState = 'idle' | 'pending' | 'succeeded' | 'failed'
+export type Language = "ru" | "en"
 
 export type TWorld = {
     name: string,
@@ -52,6 +53,7 @@ export type TSupportState = {
 
 export type initGlobalSliceType = {
     wing:WingType
+    language: Language
     loading: boolean
     image:TImageData
     worlds: {
