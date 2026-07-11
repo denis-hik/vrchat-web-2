@@ -11,4 +11,9 @@ body {
     -ms-user-select: none;
 }
 
+#root:not(:has(.scrl)) {
+    @supports (-webkit-touch-callout: none) {
+        min-height: 190vh
+    }
+}
 

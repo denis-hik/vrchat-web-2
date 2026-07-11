@@ -5,7 +5,7 @@ import {QuickContent} from "./blocks/QuickContent/QuickContent";
 
 const QuickPage = () => {
     return (
-        <QuickPageStyled>
+        <QuickPageStyled className={"scrl"}>
             <QuickBackground />
             <QuickContent />
         </QuickPageStyled>
