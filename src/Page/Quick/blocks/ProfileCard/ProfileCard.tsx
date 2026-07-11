@@ -31,6 +31,9 @@ export const ProfileCard = ({status, lead, website}: ProfileCardProps) => {
                     <ActionLink href={"https://denishik.io"} variant={"secondary"}>
                         {website}
                     </ActionLink>
+                    <ActionLink href={"https://discord.com/users/370583534647246848"} variant={"secondary"}>
+                        Discord
+                    </ActionLink>
                     <ActionLink href={"https://jinxxy.com/denis_hik"} variant={"jinxxy"}>
                         JinxXy
                     </ActionLink>
