@@ -7,7 +7,7 @@ const darkInner = css`
     background: rgba(16, 17, 23, 0.9);
 `;
 
-export const ActionLinkStyled = styled.a<{variant: ActionLinkVariant}>`
+export const ActionLinkStyled = styled.button<{variant: ActionLinkVariant}>`
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -23,6 +23,8 @@ export const ActionLinkStyled = styled.a<{variant: ActionLinkVariant}>`
     text-decoration: none;
     font-size: 14px;
     font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
     transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 
     ${({variant}) => (variant === "secondary" || variant === "jinxxy") && css`

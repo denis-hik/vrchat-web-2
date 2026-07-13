@@ -8,9 +8,10 @@ type ProfileCardProps = {
     trustRank: string;
     lead: string;
     website: string;
+    onLinkContextMenu: (event: React.MouseEvent, url: string) => void;
 };
 
-export const ProfileCard = ({status, trustRank, lead, website}: ProfileCardProps) => {
+export const ProfileCard = ({status, trustRank, lead, website, onLinkContextMenu}: ProfileCardProps) => {
     return (
         <ProfileCardStyled>
             <div className={"avatar-wrap"}>
@@ -32,19 +33,19 @@ export const ProfileCard = ({status, trustRank, lead, website}: ProfileCardProps
                     {lead}
                 </p>
                 <div className={"quick-actions"}>
-                    <ActionLink href={"https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9"} variant={"vrchat"}>
+                    <ActionLink href={"https://vrchat.com/home/user/usr_cb88a031-8fae-4dd9-bbd2-8178636e2ee9"} variant={"vrchat"} onContextMenu={onLinkContextMenu}>
                         VRChat
                     </ActionLink>
-                    <ActionLink href={"https://denishik.io"} variant={"secondary"}>
+                    <ActionLink href={"https://denishik.io"} variant={"secondary"} onContextMenu={onLinkContextMenu}>
                         {website}
                     </ActionLink>
-                    <ActionLink href={"https://discord.com/users/370583534647246848"} variant={"secondary"}>
+                    <ActionLink href={"https://discord.com/users/370583534647246848"} variant={"secondary"} onContextMenu={onLinkContextMenu}>
                         Discord
                     </ActionLink>
-                    <ActionLink href={"https://jinxxy.com/denis_hik"} variant={"jinxxy"}>
+                    <ActionLink href={"https://jinxxy.com/denis_hik"} variant={"jinxxy"} onContextMenu={onLinkContextMenu}>
                         JinxXy
                     </ActionLink>
-                    <ActionLink href={"https://denishik.gumroad.com"} variant={"secondary"}>
+                    <ActionLink href={"https://denishik.gumroad.com"} variant={"secondary"} onContextMenu={onLinkContextMenu}>
                         Gumroad
                     </ActionLink>
                 </div>

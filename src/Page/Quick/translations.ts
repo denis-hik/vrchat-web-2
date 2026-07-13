@@ -3,6 +3,7 @@ import {Language, QuickTranslation} from "./types";
 export const translations: Record<Language, QuickTranslation> = {
     ru: {
         languageLabel: "Язык",
+        copyUrl: "Скопировать URL",
         status: "13к часов онлайн",
         trustRank: "Проверенный",
         lead: "VRChat-креатор с фокусом на атмосферные миры, аватары, визуальный стиль и интерактивные веб-страницы.",
@@ -17,6 +18,7 @@ export const translations: Record<Language, QuickTranslation> = {
     },
     en: {
         languageLabel: "Language",
+        copyUrl: "Copy URL",
         status: "13k hours online",
         trustRank: "Trusted User",
         lead: "VRChat creator focused on atmospheric worlds, avatars, visual style, and interactive web pages.",

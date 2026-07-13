@@ -14,6 +14,7 @@ export type QuickImageSlot = {
 
 export type QuickTranslation = {
     languageLabel: string;
+    copyUrl: string;
     status: string;
     trustRank: string;
     lead: string;

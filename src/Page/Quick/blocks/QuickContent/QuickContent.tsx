@@ -11,7 +11,11 @@ import {AboutCard} from "../AboutCard/AboutCard";
 import {StatsGrid} from "../StatsGrid/StatsGrid";
 import {WorksCard} from "../WorksCard/WorksCard";
 
-export const QuickContent = () => {
+type QuickContentProps = {
+    onLinkContextMenu: (event: React.MouseEvent, url: string) => void;
+};
+
+export const QuickContent = ({onLinkContextMenu}: QuickContentProps) => {
     const dispatch = useAppDispatch();
     const language = useSelector(languageSelector);
     const text = useMemo(() => translations[language], [language]);
@@ -22,13 +26,13 @@ export const QuickContent = () => {
 
     return (
         <section className={"quick-shell"}>
-            <ProfileCard status={text.status} trustRank={text.trustRank} lead={text.lead} website={text.website} />
+            <ProfileCard status={text.status} trustRank={text.trustRank} lead={text.lead} website={text.website} onLinkContextMenu={onLinkContextMenu} />
 
             <div className={"right-column"}>
                 <LanguageSwitch language={language} label={text.languageLabel} onChange={handleLanguageChange} />
                 <AboutCard title={text.aboutTitle} text={text.aboutText} />
                 <StatsGrid stats={text.stats} />
-                <WorksCard />
+                <WorksCard onLinkContextMenu={onLinkContextMenu} />
             </div>
         </section>
     );

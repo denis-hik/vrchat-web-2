@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
-export const ImageSlotLinkStyled = styled.a`
+export const ImageSlotLinkStyled = styled.button<{$clickable?: boolean}>`
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -17,6 +17,7 @@ export const ImageSlotLinkStyled = styled.a`
     box-shadow: 0 20px 70px rgba(0, 0, 0, 0.32);
     backdrop-filter: blur(18px);
     font-size: 13px;
+    font-family: inherit;
     line-height: 1.35;
     text-decoration: none;
     transition: transform 0.2s ease, border-color 0.2s ease;
@@ -56,30 +57,30 @@ export const ImageSlotLinkStyled = styled.a`
         color: rgba(255, 255, 255, 0.9);
     }
 
-    &[href] {
+    ${({$clickable}) => $clickable && css`
         cursor: pointer;
-    }
 
-    &[href]:hover {
-        transform: translateY(-2px);
-        border-color: transparent;
-    }
+        &:hover {
+            transform: translateY(-2px);
+            border-color: transparent;
+        }
 
-    &[href]:hover:before {
-        opacity: 1;
-        animation: quickGradientStroke 2.8s linear infinite;
-    }
+        &:hover:before {
+            opacity: 1;
+            animation: quickGradientStroke 2.8s linear infinite;
+        }
 
-    &[href]:hover:after {
-        inset: 2px;
-        border-radius: 12px;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 24%, rgba(0, 0, 0, 0.82) 100%);
-    }
+        &:hover:after {
+            inset: 2px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 24%, rgba(0, 0, 0, 0.82) 100%);
+        }
 
-    &[href]:hover img {
-        transform: scale(1.045);
-        filter: saturate(1.12) contrast(1.05);
-    }
+        &:hover img {
+            transform: scale(1.045);
+            filter: saturate(1.12) contrast(1.05);
+        }
+    `}
 
     @keyframes quickGradientStroke {
         0% {
