@@ -10,7 +10,7 @@ const reflectionDragonOutfitUrl = "https://jinxxy.com/denis_hik/yQHX1";
 export const worksSlots: QuickImageSlot[] = [
     {id: "avatar-and", image: avatarAndImage, url: avatarUrl},
     {id: "mountain-room", image: mountainRoomImage, url: mountainRoomUrl},
-    {id: "reflection-dragon-outfit", image: reflectionDragonOutfitImage, imagePosition: "left center", url: reflectionDragonOutfitUrl},
+    {id: "reflection-dragon-outfit", image: reflectionDragonOutfitImage, imagePosition: "25%", url: reflectionDragonOutfitUrl},
 ];
 
 export const worksCopy: Record<Language, {title: string; text: string; slotTitles: Record<string, string>}> = {

@@ -40,4 +40,20 @@ export const AboutCardStyled = styled.article`
         font-size: 14px;
         font-weight: 800;
     }
+
+    @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
+        height: 100%;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
 `;

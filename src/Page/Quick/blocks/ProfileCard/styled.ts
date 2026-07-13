@@ -112,4 +112,33 @@ export const ProfileCardStyled = styled.article`
             min-height: 330px;
         }
     }
+
+    @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .avatar-wrap {
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .avatar-wrap img {
+            height: 100%;
+            min-height: 0;
+        }
+
+        .profile-body {
+            flex: 0 0 auto;
+            padding: 0 28px 28px;
+        }
+
+        h1 {
+            font-size: clamp(58px, 4.2vw, 86px);
+        }
+
+        .lead {
+            font-size: 18px;
+        }
+    }
 `;

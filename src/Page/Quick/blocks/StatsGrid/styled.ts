@@ -32,4 +32,25 @@ export const StatsGridStyled = styled.div`
     @media (max-width: 760px) {
         grid-template-columns: 1fr;
     }
+
+    @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
+        height: 100%;
+        grid-template-columns: 1fr;
+
+        .stat {
+            min-height: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stat strong {
+            font-size: 32px;
+        }
+
+        .stat span {
+            font-size: 15px;
+        }
+    }
 `;

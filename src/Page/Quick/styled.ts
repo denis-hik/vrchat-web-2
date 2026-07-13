@@ -119,6 +119,42 @@ export const QuickPageStyled = styled.main`
         }
     }
 
+    @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
+        min-height: 100vh;
+        padding: 72px 40px 40px;
+
+        .quick-shell {
+            width: min(1840px, 100%);
+            min-height: calc(100vh - 112px);
+            grid-template-columns: minmax(420px, 0.82fr) minmax(0, 1.68fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .right-column {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: auto minmax(0, 0.84fr) minmax(0, 1.16fr);
+            gap: 24px;
+            min-height: 0;
+        }
+
+        .right-column > *:nth-child(1) {
+            grid-column: 1 / -1;
+        }
+
+        .right-column > *:nth-child(2) {
+            grid-column: 1 / 3;
+        }
+
+        .right-column > *:nth-child(3) {
+            grid-column: 3;
+        }
+
+        .right-column > *:nth-child(4) {
+            grid-column: 1 / -1;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .quick-shell > *,
         .right-column > * {

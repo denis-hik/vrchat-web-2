@@ -89,4 +89,10 @@ export const ImageSlotLinkStyled = styled.a`
             background-position: 260% 50%;
         }
     }
+
+    @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
+        min-height: 0;
+        padding: 18px;
+        font-size: 15px;
+    }
 `;
