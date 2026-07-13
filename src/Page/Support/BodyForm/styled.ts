@@ -8,18 +8,21 @@ export const BodyFormStyled = styled.section`
     box-sizing: border-box;
     padding: 32px 28px;
     min-height: 360px;
-    border-radius: 28px;
+    border-radius: 18px;
     overflow: hidden;
     color: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(16, 17, 23, 0.58);
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(18px);
 
     &::before {
         content: "";
         position: absolute;
         inset: 0;
         background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
-            rgba(9, 13, 25, 0.36);
-        backdrop-filter: blur(30px);
+            linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+            rgba(16, 17, 23, 0.18);
         z-index: -1;
     }
 
@@ -56,14 +59,11 @@ export const BodyFormStyled = styled.section`
 
     .support-input-wrap {
         position: relative;
-        border-radius: 18px;
+        border-radius: 14px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.18),
-            0 16px 35px rgba(2, 6, 18, 0.26);
-        backdrop-filter: blur(26px) saturate(1.4);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .support-input-wrap input {
@@ -74,7 +74,7 @@ export const BodyFormStyled = styled.section`
         outline: 0;
         color: rgba(255, 255, 255, 0.96);
         font: 500 15px/1 system-ui, sans-serif;
-        background: rgba(7, 10, 20, 0.18);
+        background: rgba(16, 17, 23, 0.34);
     }
 
     .support-input-wrap input:disabled {
@@ -90,12 +90,11 @@ export const BodyFormStyled = styled.section`
         height: 52px;
         padding: 0 22px;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 18px;
+        border-radius: 14px;
         color: rgba(255, 255, 255, 0.96);
-        font: 600 15px/1 system-ui, sans-serif;
-        background: rgba(124, 156, 255, 0.16);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(20px) saturate(1.2);
+        font: 800 15px/1 system-ui, sans-serif;
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         cursor: pointer;
         transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
@@ -108,13 +107,13 @@ export const BodyFormStyled = styled.section`
 
     button:hover {
         transform: translateY(-1px);
-        background: rgba(124, 156, 255, 0.22);
+        background: rgba(255, 255, 255, 0.2);
         border-color: rgba(255, 255, 255, 0.18);
     }
 
     button:active {
         transform: translateY(0);
-        background: rgba(124, 156, 255, 0.14);
+        background: rgba(255, 255, 255, 0.12);
     }
 
     .support-product {
@@ -141,8 +140,8 @@ export const BodyFormStyled = styled.section`
         width: 92px;
         height: 92px;
         object-fit: cover;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
         background: rgba(255, 255, 255, 0.06);
         box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
     }
@@ -182,10 +181,9 @@ export const BodyFormStyled = styled.section`
         display: grid;
         gap: 14px;
         min-height: 0;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
         padding: 18px;
         opacity: 0;
         max-height: 0;
@@ -226,13 +224,12 @@ export const BodyFormStyled = styled.section`
     .support-field textarea {
         width: 100%;
         box-sizing: border-box;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 14px;
         outline: 0;
         color: rgba(255, 255, 255, 0.96);
         font: 500 15px/1.45 system-ui, sans-serif;
-        background: rgba(11, 14, 24, 0.22);
-        backdrop-filter: blur(18px) saturate(1.15);
+        background: rgba(16, 17, 23, 0.34);
     }
 
     .support-field input {
@@ -280,7 +277,10 @@ export const BodyFormStyled = styled.section`
     }
 
     .support-message {
+        display: flex;
+        align-items: center;
         border-radius: 16px;
+        min-height: 44px;
         padding: 12px 14px;
         font: 500 13px/1.45 system-ui, sans-serif;
         backdrop-filter: blur(18px);
