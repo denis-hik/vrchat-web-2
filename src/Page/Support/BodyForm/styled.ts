@@ -20,9 +20,8 @@ export const BodyFormStyled = styled.section`
         content: "";
         position: absolute;
         inset: 0;
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-            rgba(16, 17, 23, 0.18);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(16, 17, 23, 0.18);
         z-index: -1;
     }
 
@@ -296,6 +295,21 @@ export const BodyFormStyled = styled.section`
         border: 1px solid rgba(126, 239, 154, 0.18);
         background: rgba(89, 210, 119, 0.08);
         color: rgba(217, 255, 225, 0.96);
+    }
+
+    .support-mail {
+        justify-self: center;
+        width: fit-content;
+        color: rgba(255, 255, 255, 0.24);
+        font: 700 14px/1.2 system-ui, sans-serif;
+        text-decoration: none;
+        transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .support-mail:hover {
+        color: rgba(196, 125, 255, 0.88);
+        text-shadow: 0 0 14px rgba(168, 85, 247, 0.34);
+        transform: translateY(-1px);
     }
 
     @media (max-width: 767px) {

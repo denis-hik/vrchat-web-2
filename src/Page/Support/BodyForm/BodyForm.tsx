@@ -64,7 +64,9 @@ export const BodyForm = () => {
     const hasProduct = useMemo(() => product !== undefined, [product]);
     const checking = checkState === "pending";
     const sending = sendState === "pending";
-    const canCheck = !checking && !hasProduct;
+    const activeError = localError || supportError;
+    const canEditKey = !checking && !hasProduct;
+    const canCheck = canEditKey && !activeError;
 
     useEffect(() => {
         return () => {
@@ -161,7 +163,7 @@ export const BodyForm = () => {
                             onChange={(event) => setValue("key", event.target.value)}
                             onKeyDown={onKeyDown}
                             placeholder={"Key product"}
-                            disabled={!canCheck}
+                            disabled={!canEditKey}
                         />
                     </div>
 
@@ -202,15 +204,15 @@ export const BodyForm = () => {
                 />
 
                 <div className={"support-submit-row"}>
-                    <button type={"button"} onClick={onSend} disabled={!hasProduct || sending}>
+                    <button type={"button"} onClick={onSend} disabled={!hasProduct || sending || Boolean(activeError)}>
                         {sending ? "Sending..." : "Send"}
                     </button>
                 </div>
             </div>
 
-            {(localError || supportError) && (
+            {activeError && (
                 <div className={"support-message error"}>
-                    {localError || supportError}
+                    {activeError}
                 </div>
             )}
 
@@ -218,6 +220,12 @@ export const BodyForm = () => {
                 <div className={"support-message success"}>
                     Support request sent successfully.
                 </div>
+            )}
+
+            {!hasProduct && (
+                <a className={"support-mail"} href={"mailto:vrchat@denishik.io"}>
+                    vrchat@denishik.io
+                </a>
             )}
         </BodyFormStyled>
     );
