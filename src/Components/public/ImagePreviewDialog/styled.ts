@@ -97,13 +97,46 @@ export const ImagePreviewDialogStyled = styled.div<{$visible: boolean}>`
         transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    .image-loader {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+            radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 34%),
+            rgba(0, 0, 0, 0.18);
+        opacity: 1;
+        pointer-events: none;
+    }
+
+    .image-loader span {
+        width: 42px;
+        height: 42px;
+        border: 3px solid rgba(255, 255, 255, 0.24);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: imagePreviewLoader 0.8s linear infinite;
+    }
+
     .carousel img {
         width: 100%;
         height: 100%;
         max-height: 100%;
         display: block;
         object-fit: contain;
-        transition: opacity 0.2s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: opacity 0.24s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .carousel img.is-loading {
+        opacity: 0;
+        transform: scale(0.985);
+    }
+
+    .carousel img.is-loaded {
+        opacity: 1;
+        transform: scale(1);
     }
 
     .carousel-button {
@@ -144,6 +177,12 @@ export const ImagePreviewDialogStyled = styled.div<{$visible: boolean}>`
         font-size: 14px;
         font-weight: 800;
         border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    @keyframes imagePreviewLoader {
+        to {
+            transform: rotate(360deg);
+        }
     }
 
     @media (max-width: 760px) {

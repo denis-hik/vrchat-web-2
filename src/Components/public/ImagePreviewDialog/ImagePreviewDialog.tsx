@@ -26,6 +26,7 @@ export const ImagePreviewDialog = ({open, title, listImages, buttonHeader, onClo
     const [isMounted, setIsMounted] = useState(open);
     const [isVisible, setIsVisible] = useState(false);
     const [carouselHeight, setCarouselHeight] = useState<number>();
+    const [isImageLoading, setIsImageLoading] = useState(true);
     const hasMultipleImages = listImages.length > 1;
     const activeImage = listImages[activeIndex] ?? listImages[0];
 
@@ -43,6 +44,7 @@ export const ImagePreviewDialog = ({open, title, listImages, buttonHeader, onClo
         const imageRatioHeight = panelWidth * (image.naturalHeight / image.naturalWidth);
 
         setCarouselHeight(Math.min(imageRatioHeight, maxHeight));
+        setIsImageLoading(false);
     }, []);
 
     const handleHeaderButtonClick = useCallback(() => {
@@ -115,8 +117,13 @@ export const ImagePreviewDialog = ({open, title, listImages, buttonHeader, onClo
         if (open) {
             setActiveIndex(0);
             setCarouselHeight(undefined);
+            setIsImageLoading(true);
         }
     }, [open, title]);
+
+    useEffect(() => {
+        setIsImageLoading(true);
+    }, [activeIndex, title]);
 
     if (!isMounted || !activeImage) {
         return null;
@@ -146,13 +153,25 @@ export const ImagePreviewDialog = ({open, title, listImages, buttonHeader, onClo
                 </div>
 
                 <div className={"carousel"} style={carouselHeight ? {height: carouselHeight} : undefined}>
+                    {isImageLoading && (
+                        <div className={"image-loader"} aria-hidden={"true"}>
+                            <span />
+                        </div>
+                    )}
+
                     {hasMultipleImages && (
                         <button type={"button"} className={"carousel-button prev"} onClick={showPrevious} aria-label={"Previous image"}>
                             {"<"}
                         </button>
                     )}
 
-                    <img src={activeImage.src} alt={activeImage.alt ?? `${title} ${activeIndex + 1}`} onLoad={(event) => updateCarouselHeight(event.currentTarget)} />
+                    <img
+                        key={activeImage.src}
+                        className={isImageLoading ? "is-loading" : "is-loaded"}
+                        src={activeImage.src}
+                        alt={activeImage.alt ?? `${title} ${activeIndex + 1}`}
+                        onLoad={(event) => updateCarouselHeight(event.currentTarget)}
+                    />
 
                     {hasMultipleImages && (
                         <button type={"button"} className={"carousel-button next"} onClick={showNext} aria-label={"Next image"}>
