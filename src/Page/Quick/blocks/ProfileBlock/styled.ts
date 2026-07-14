@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProfileCardStyled = styled.article`
+export const ProfileBlockStyled = styled.article`
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(16, 17, 23, 0.58);
     box-shadow: 0 20px 70px rgba(0, 0, 0, 0.32);

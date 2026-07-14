@@ -5,11 +5,11 @@ import {languageSelector} from "../../../../Context/selectors";
 import {setLanguage} from "../../../../Context/reducer/globalSlice";
 import {useAppDispatch} from "../../../../store/hooks";
 import {useSelector} from "react-redux";
-import {ProfileCard} from "../ProfileCard/ProfileCard";
+import {ProfileBlock} from "../ProfileBlock";
 import {LanguageSwitch} from "../LanguageSwitch/LanguageSwitch";
-import {AboutCard} from "../AboutCard/AboutCard";
-import {StatsGrid} from "../StatsGrid/StatsGrid";
-import {WorksCard} from "../WorksCard/WorksCard";
+import {MeBlock} from "../MeBlock";
+import {HintBlock} from "../HintBlock";
+import {WorksBlock} from "../WorksBlock";
 
 type QuickContentProps = {
     onLinkContextMenu: (event: React.MouseEvent, url: string) => void;
@@ -26,13 +26,13 @@ export const QuickContent = ({onLinkContextMenu}: QuickContentProps) => {
 
     return (
         <section className={"quick-shell"}>
-            <ProfileCard status={text.status} trustRank={text.trustRank} lead={text.lead} website={text.website} onLinkContextMenu={onLinkContextMenu} />
+            <ProfileBlock status={text.status} trustRank={text.trustRank} lead={text.lead} website={text.website} onLinkContextMenu={onLinkContextMenu} />
 
             <div className={"right-column"}>
                 <LanguageSwitch language={language} label={text.languageLabel} onChange={handleLanguageChange} />
-                <AboutCard title={text.aboutTitle} text={text.aboutText} />
-                <StatsGrid stats={text.stats} />
-                <WorksCard onLinkContextMenu={onLinkContextMenu} />
+                <MeBlock title={text.aboutTitle} text={text.aboutText} />
+                <HintBlock stats={text.stats} />
+                <WorksBlock onLinkContextMenu={onLinkContextMenu} />
             </div>
         </section>
     );

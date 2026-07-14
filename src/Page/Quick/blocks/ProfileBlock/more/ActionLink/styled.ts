@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import JinxXyTtf from "../../../../media/JinxXy.ttf";
+import JinxXyTtf from "../../../../../../media/JinxXy.ttf";
 
 export type ActionLinkVariant = "primary" | "secondary" | "vrchat" | "jinxxy";
 

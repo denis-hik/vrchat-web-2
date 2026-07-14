@@ -1,14 +1,14 @@
 import React from "react";
-import {AboutCardStyled} from "./styled";
+import {MeBlockStyled} from "./styled";
 
-type AboutCardProps = {
+type MeBlockProps = {
     title: string;
     text: string;
 };
 
-export const AboutCard = ({title, text}: AboutCardProps) => {
+export const MeBlock = ({title, text}: MeBlockProps) => {
     return (
-        <AboutCardStyled>
+        <MeBlockStyled>
             <h2>{title}</h2>
             <p>
                 {text}
@@ -19,6 +19,6 @@ export const AboutCard = ({title, text}: AboutCardProps) => {
                 <span className={"tag"}>Avatars</span>
                 <span className={"tag"}>Design</span>
             </div>
-        </AboutCardStyled>
+        </MeBlockStyled>
     );
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import avatarImage from "../../../../media/quick/avatar-square.png";
-import {ProfileCardStyled} from "./styled";
-import {ActionLink} from "../ActionLink/ActionLink";
+import {ProfileBlockStyled} from "./styled";
+import {ActionLink} from "./more/ActionLink/ActionLink";
 
-type ProfileCardProps = {
+type ProfileBlockProps = {
     status: string;
     trustRank: string;
     lead: string;
@@ -11,9 +11,9 @@ type ProfileCardProps = {
     onLinkContextMenu: (event: React.MouseEvent, url: string) => void;
 };
 
-export const ProfileCard = ({status, trustRank, lead, website, onLinkContextMenu}: ProfileCardProps) => {
+export const ProfileBlock = ({status, trustRank, lead, website, onLinkContextMenu}: ProfileBlockProps) => {
     return (
-        <ProfileCardStyled>
+        <ProfileBlockStyled>
             <div className={"avatar-wrap"}>
                 <img src={avatarImage} alt={"Denis Hik"} />
             </div>
@@ -50,6 +50,6 @@ export const ProfileCard = ({status, trustRank, lead, website, onLinkContextMenu
                     </ActionLink>
                 </div>
             </div>
-        </ProfileCardStyled>
+        </ProfileBlockStyled>
     );
 };

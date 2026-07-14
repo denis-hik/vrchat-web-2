@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ImageSlotsCardStyled = styled.article`
+export const MeBlockStyled = styled.article`
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(16, 17, 23, 0.58);
     box-shadow: 0 20px 70px rgba(0, 0, 0, 0.32);
@@ -20,17 +20,25 @@ export const ImageSlotsCardStyled = styled.article`
         line-height: 1.6;
     }
 
-    .image-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: 18px;
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
     }
 
-    @media (max-width: 760px) {
-        .image-grid {
-            grid-template-columns: 1fr;
-        }
+    .tag {
+        min-height: 38px;
+        padding: 0 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.84);
+        background: rgba(255, 255, 255, 0.09);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 800;
     }
 
     @media (min-width: 1600px) and (min-aspect-ratio: 21/10) {
@@ -38,6 +46,7 @@ export const ImageSlotsCardStyled = styled.article`
         padding: 28px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
 
         h2 {
             font-size: 30px;
@@ -45,11 +54,6 @@ export const ImageSlotsCardStyled = styled.article`
 
         p {
             font-size: 18px;
-        }
-
-        .image-grid {
-            flex: 1 1 auto;
-            min-height: 0;
         }
     }
 `;

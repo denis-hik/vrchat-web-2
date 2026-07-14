@@ -1,11 +1,12 @@
 import React from "react";
-import {QuickImageSlot} from "../../../../types";
+import {QuickImageSlot} from "../../../../../../types";
 import {ImageSlotLinkStyled} from "./styled";
 
 type ImageSlotLinkProps = {
     slot: QuickImageSlot;
     title: string;
     onContextMenu: (event: React.MouseEvent, url: string) => void;
+    onOpen?: () => void;
 };
 
 type ImageSlotImageProps = {
@@ -21,8 +22,17 @@ const ImageSlotImage = React.memo(({image, imagePosition, alt}: ImageSlotImagePr
     return <img src={image} alt={alt} style={{objectPosition: imagePosition}} />;
 });
 
-export const ImageSlotLink = ({slot, title, onContextMenu}: ImageSlotLinkProps) => {
-    const handleClick = () => {
+export const ImageSlotLink = ({slot, title, onContextMenu, onOpen}: ImageSlotLinkProps) => {
+    const handleClick = (event: React.MouseEvent) => {
+        if (event.button !== 0) {
+            return;
+        }
+
+        if (onOpen) {
+            onOpen();
+            return;
+        }
+
         if (slot.url) {
             window.open(slot.url, "_blank", "noopener,noreferrer");
         }
@@ -34,7 +44,15 @@ export const ImageSlotLink = ({slot, title, onContextMenu}: ImageSlotLinkProps) 
     };
 
     const handleMouseDown = (event: React.MouseEvent) => {
-        if (!slot.url || event.button !== 2) {
+        if (event.button !== 2) {
+            return;
+        }
+
+        if (onOpen) {
+            return;
+        }
+
+        if (!slot.url) {
             return;
         }
 
@@ -48,7 +66,7 @@ export const ImageSlotLink = ({slot, title, onContextMenu}: ImageSlotLinkProps) 
         </>
     );
 
-    if (!slot.url) {
+    if (!slot.url && !onOpen) {
         return (
             <ImageSlotLinkStyled as={"div"}>
                 {content}
