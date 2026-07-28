@@ -1,5 +1,5 @@
 import GlassSurface from "../../public/GlassSurface/GlassSurface";
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef} from "react";
 import DecryptedText from "../../public/DecryptedText/DecryptedText";
 import {HeaderStyled} from "./styled";
 import logo from "../../../media/logo.png";
@@ -29,14 +29,12 @@ export const Header = () => {
         return wing !== undefined
     },[wing])
 
-    const [show, setShow] = useState(false)
-
     const onStart = useCallback(() => {
         if (wing === undefined)
             return window.open("https://denishik.io", "_blank")
 
         dispatch(setWing(undefined))
-    }, [wing])
+    }, [dispatch, wing])
 
     const onVrchat = useCallback(() => {
         if (location.pathname === "/quick") {
@@ -64,7 +62,7 @@ export const Header = () => {
     }, [location.pathname])
 
     return (
-        <HeaderStyled className={(active ? 'active' : '') + (show ? " hide" :'')}>
+        <HeaderStyled className={active ? 'active' : ''}>
             <GlassSurface
                 mixBlendMode={"difference"}
                 borderRadius={24}
@@ -72,7 +70,7 @@ export const Header = () => {
                 fallbackOnly
             >
                 <div className={"logo"}>
-                    <img src={loading ? logoLoading : logo} onClick={onStart} />
+                    <img src={loading ? logoLoading : logo} onClick={onStart} alt={"Denis Hik logo"} />
                 </div>
                 <div className={"back"} onClick={onStart}>
                     Back
@@ -87,7 +85,7 @@ export const Header = () => {
                     />
                 </div>
                 <div className={"logo1"}>
-                    <img src={logoV} onClick={onVrchat} />
+                    <img src={logoV} onClick={onVrchat} alt={"VRChat logo"} />
                 </div>
             </GlassSurface>
 

@@ -1,11 +1,6 @@
 import React, {CSSProperties, useEffect, useRef} from 'react';
 import './SpotlightCard.css';
 
-interface Position {
-    x: number;
-    y: number;
-}
-
 export interface SpotlightCardProps extends React.PropsWithChildren {
     className?: string;
     spotlightColor?: CSSProperties["color"];
@@ -39,7 +34,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
             divRef.current.style.setProperty('--origin-color', backgroundColor);
             divRef.current.style.setProperty('--border-color', borderColor);
         }
-    }, [divRef?.current]);
+    }, [backgroundColor, borderColor]);
 
     return (
         <div ref={divRef} onMouseMove={handleMouseMove} className={`card-spotlight ${className}`}>

@@ -3,6 +3,7 @@ import {Language} from "../../types";
 import {translations} from "../../translations";
 import {languageSelector} from "../../../../Context/selectors";
 import {setLanguage} from "../../../../Context/reducer/globalSlice";
+import {saveLanguage} from "../../../../Context/reducer/init";
 import {useAppDispatch} from "../../../../store/hooks";
 import {useSelector} from "react-redux";
 import {ProfileBlock} from "../ProfileBlock";
@@ -21,6 +22,7 @@ export const QuickContent = ({onLinkContextMenu}: QuickContentProps) => {
     const text = useMemo(() => translations[language], [language]);
 
     const handleLanguageChange = useCallback((nextLanguage: Language) => {
+        saveLanguage(nextLanguage);
         dispatch(setLanguage(nextLanguage));
     }, [dispatch]);
 

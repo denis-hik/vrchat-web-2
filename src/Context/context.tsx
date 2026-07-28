@@ -174,7 +174,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
             if (cancelled)
                 return
 
-            if (!!image?.revert) {
+            if (!!image.revert) {
                 if (timer.current)
                     clearTimeout(timer.current)
 
@@ -193,7 +193,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
                 }))
                 dispatch(setLoading(false))
 
-                timer.current = timer.current = setTimeout(async () => {
+                timer.current = setTimeout(async () => {
                     await preloadPair(next)
                     if (!cancelled)
                         dispatch(setCurrentImage(next))
@@ -243,7 +243,7 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
             if (timer.current)
                 clearTimeout(timer.current)
         }
-    }, [wing])
+    }, [dispatch, image.id, image.revert, wing])
 
     useEffect(() => {
         let cancelled = false
@@ -293,4 +293,3 @@ const PageContextProvider:React.FC<{children:any}> = ({children}) => {
     );
 };
 export default PageContextProvider
-

@@ -20,7 +20,7 @@ export const Wings = () => {
                 ? "world"
                 : e.target.className.includes("wing-l") ? "stack" : undefined))
         }
-    }, [])
+    }, [dispatch])
 
     return (
         <WingsStyled selected={wing !== undefined}>

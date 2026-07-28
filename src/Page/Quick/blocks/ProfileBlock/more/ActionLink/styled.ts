@@ -27,6 +27,14 @@ export const ActionLinkStyled = styled.button<{variant: ActionLinkVariant}>`
     cursor: pointer;
     transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 
+    .action-icon {
+        width: 13px;
+        height: 13px;
+        margin-right: 7px;
+        object-fit: contain;
+        filter: invert(1);
+    }
+
     ${({variant}) => (variant === "secondary" || variant === "jinxxy") && css`
         color: #ffffff;
         background: rgba(255, 255, 255, 0.12);

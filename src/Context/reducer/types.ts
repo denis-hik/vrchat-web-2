@@ -12,6 +12,7 @@ export type TWorld = {
 
 export type TLink = {
     icon: string
+    label: string
     url: string
 }
 

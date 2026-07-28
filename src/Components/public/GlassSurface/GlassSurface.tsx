@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useId, useRef} from 'react';
+import React, {CSSProperties, useCallback, useEffect, useId, useRef} from 'react';
 import './GlassSurface.css';
 
 export interface GlassSurfaceProps {
@@ -82,7 +82,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     const blueChannelRef = useRef<SVGFEDisplacementMapElement>(null);
     const gaussianBlurRef = useRef<SVGFEGaussianBlurElement>(null);
 
-    const generateDisplacementMap = () => {
+    const generateDisplacementMap = useCallback(() => {
         const rect = containerRef.current?.getBoundingClientRect();
         const actualWidth = rect?.width || 400;
         const actualHeight = rect?.height || 200;
@@ -108,11 +108,11 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     `;
 
         return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
-    };
+    }, [blueGradId, blur, borderRadius, borderWidth, brightness, mixBlendMode, opacity, redGradId]);
 
-    const updateDisplacementMap = () => {
+    const updateDisplacementMap = useCallback(() => {
         feImageRef.current?.setAttribute('href', generateDisplacementMap());
-    };
+    }, [generateDisplacementMap]);
 
     useEffect(() => {
         updateDisplacementMap();
@@ -144,7 +144,8 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
         blueOffset,
         xChannel,
         yChannel,
-        mixBlendMode
+        mixBlendMode,
+        updateDisplacementMap
     ]);
 
     useEffect(() => {
@@ -165,13 +166,13 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
             if (timeout)
                 clearTimeout(timeout);
         };
-    }, []);
+    }, [updateDisplacementMap]);
 
     useEffect(() => {
         const timeout = setTimeout(updateDisplacementMap, 0);
 
         return () => clearTimeout(timeout);
-    }, [width, height]);
+    }, [width, height, updateDisplacementMap]);
 
     const supportsSVGFilters = () => {
         const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);

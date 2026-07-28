@@ -12,8 +12,9 @@ export const BottomItemContent = () => {
                 href={link.url}
                 className={"item-link"}
                 target={"_blank"}
+                rel={"noreferrer"}
             >
-                {link.icon !== "JinxXy" && <img alt={String(index)} src={link.icon}/>}
+                {link.icon !== "JinxXy" && <img alt={link.label} src={link.icon}/>}
                 {link.icon === "JinxXy" ? <span className={"JinxXy"}>JinxXy</span> : ''}
             </a>))}
         </BottomItemContentStyled>

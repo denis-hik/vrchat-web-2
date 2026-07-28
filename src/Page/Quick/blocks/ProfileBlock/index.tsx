@@ -42,6 +42,9 @@ export const ProfileBlock = ({status, trustRank, lead, website, onLinkContextMen
                     <ActionLink href={"https://discord.com/users/370583534647246848"} variant={"secondary"} onContextMenu={onLinkContextMenu}>
                         Discord
                     </ActionLink>
+                    <ActionLink href={"https://x.com/denis_hik"} variant={"secondary"} onContextMenu={onLinkContextMenu}>
+                        X
+                    </ActionLink>
                     <ActionLink href={"https://jinxxy.com/denis_hik"} variant={"jinxxy"} onContextMenu={onLinkContextMenu}>
                         JinxXy
                     </ActionLink>
